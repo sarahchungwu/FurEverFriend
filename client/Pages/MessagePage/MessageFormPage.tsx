@@ -1,5 +1,5 @@
-function MassageFormPage() {
-  return <h1>I am in the MassageFormPage</h1>
+function MessageFormPage() {
+  return <h1>I am in the MessageFormPage</h1>
 }
 
-export default MassageFormPage
+export default MessageFormPage
