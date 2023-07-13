@@ -1,25 +1,11 @@
-import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { fetchFruits } from '../slices/fruits'
+import { Outlet } from 'react-router-dom'
+import Header from './Header/Header'
 
 function App() {
-  const fruits = useAppSelector((state) => state.fruits)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchFruits())
-  }, [dispatch])
-
   return (
-    <>
-      <div className="app">
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>
-          {fruits.map((fruit) => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div>
+      <h1>I am in the App Page</h1>
+    </div>
   )
 }
 
