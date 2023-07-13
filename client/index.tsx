@@ -12,10 +12,18 @@ function AppProvider() {
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<App />}>
-        <Route index element={<PetMainPage />} />
-        <Route path="/detail/:id" element={<PetDetail />} />
-        <Route path="/study" element={<Study />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route index element={<LanddingPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/dogs/new" element={<NewDogFormPage />} />
+        {/* in the dog profile, should aslo can view MatchList */}
+        <Route path="/dogs/:id" element={<DogProfilePage />} />
+        <Route path="/dogs/:id/matches" element={<MatchListPage />} />
+        <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
+        <Route path="/massages" element={<MassageListPage />} />
+        <Route path="/massages/:id" element={<MassageDatailPage />} />
+        <Route path="/massages/add" element={<MassageFormPage />} />
       </Route>,
     ),
   )
