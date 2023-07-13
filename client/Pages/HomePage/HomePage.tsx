@@ -1,4 +1,5 @@
-import DogList from '../../components/DogList/DogList'
+import DogList from '../../components/Dogs/DogList'
+import NoDog from '../../components/Dogs/NoDog'
 
 function HomePage() {
   return (
@@ -8,6 +9,7 @@ function HomePage() {
       </div>
       <div>
         <DogList />
+        <NoDog />
       </div>
       <div>
         <button>start a Match</button>

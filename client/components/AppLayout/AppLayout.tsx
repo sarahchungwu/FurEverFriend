@@ -4,7 +4,8 @@ import Header from '../Header/Header'
 
 function AppLayout() {
   return (
-    <div className="bg-darkPurple h-screen text-white">
+    <div className="bg-gray-700">
+      <h1>I am in the app Layout Page</h1>
       <Header />
       <Outlet />
     </div>
