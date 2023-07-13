@@ -4,11 +4,13 @@ import Header from '../Header/Header'
 
 function AppLayout() {
   return (
-    <div className="bg-gray-700">
-      <h1>I am in the app Layout Page</h1>
-      <Header />
-      <Outlet />
-    </div>
+    <>
+      <div className="bg-red-300">
+        <h1>I am in the app Layout Page</h1>
+        <Header />
+        <Outlet />
+      </div>
+    </>
   )
 }
 
