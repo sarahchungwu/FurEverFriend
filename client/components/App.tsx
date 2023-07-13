@@ -1,15 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import Header from './Header'
+import Header from './Header/Header'
 
 function App() {
   return (
     <div>
-      <section className="main">
-        <div className="left-top">
-          <Header />
-        </div>
-      </section>
-      <Outlet />
+      <h1>I am in the App Page</h1>
     </div>
   )
 }

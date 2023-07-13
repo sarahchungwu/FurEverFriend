@@ -6,12 +6,12 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import App from './components/App'
+import AppLayout from './components/AppLayout/AppLayout'
 
 function AppProvider() {
   const routes = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<App />}>
+      <Route path="/" element={<AppLayout />}>
         <Route index element={<LanddingPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useIsBusy } from '../hooks/useIsBusy'
-import Logo from './Logo'
-import Nav from './Nav'
+import { useIsBusy } from '../../hooks/useIsBusy'
+import Logo from '../Logo'
+import Nav from '../Nav/Nav'
 
 function Header() {
   const [navOpened, setNavOpened] = useState(false)
