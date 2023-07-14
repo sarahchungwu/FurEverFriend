@@ -6,44 +6,44 @@ interface Props {
 }
 
 function Nav(props: Props) {
-  // function handleLogin() {
-  //   loginWithRedirect({
-  //     authorizationParams: {
-  //       redirect_uri: `${window.location.origin}/my-songs`,
-  //     },
-  //   })
-  // }
+  const { isAuthenticated, logout, loginWithRedirect } = useAuth0()
+  const navigate = useNavigate()
 
-  // function handleLogout() {
-  //   logout({ logoutParams: { returnTo: window.location.origin } })
-  // }
+  function handleLogin() {
+    loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: `${window.location.origin}/my-songs`,
+      },
+    })
+  }
 
-  // function goTo(link: string) {
-  //   props.toggleMenu()
-  //   navigate(link)
-  // }
+  function handleLogout() {
+    logout({ logoutParams: { returnTo: window.location.origin } })
+  }
+
+  function goTo(link: string) {
+    props.toggleMenu()
+    navigate(link)
+  }
 
   return (
     <nav className="pt-16 pl-4 flex">
       I am in the Nav Bar
-      {/* <ul className="text-3xl">
+      <ul className="text-3xl">
         <li>
-          <button onClick={() => goTo('/my-songs')}>My songs</button>
+          <button onClick={() => goTo('/home')}>Home</button>
         </li>
         <li>
-          <button onClick={() => goTo('/add-song')}>Add songs</button>
+          <button onClick={() => goTo('/dogs')}>My Dogs</button>
         </li>
         <li>
-          <button onClick={() => goTo('/my-friends')}>My friends</button>
+          <button onClick={() => goTo('/profile')}>My Profile</button>
         </li>
         <li>
-          <button onClick={() => goTo('/profile')}>Edit Profile</button>
+          <button onClick={() => goTo('/dogs/matches')}>My Match</button>
         </li>
         <li>
-          <button onClick={() => goTo('/scan')}>Scan QR code</button>
-        </li>
-        <li>
-          <button onClick={() => goTo('/show-qr')}>Share QR code</button>
+          <button onClick={() => goTo('/messages')}>My message</button>
         </li>
         <li>
           {!isAuthenticated && <button onClick={handleLogin}>Log in</button>}
@@ -51,7 +51,7 @@ function Nav(props: Props) {
         <li>
           {isAuthenticated && <button onClick={handleLogout}>Log out</button>}
         </li>
-      </ul> */}
+      </ul>
     </nav>
   )
 }
