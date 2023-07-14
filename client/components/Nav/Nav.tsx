@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   toggleMenu: () => void
@@ -8,11 +8,11 @@ interface Props {
 function Nav(props: Props) {
   const { isAuthenticated, logout, loginWithRedirect } = useAuth0()
   const navigate = useNavigate()
-
   function handleLogin() {
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: `${window.location.origin}/my-songs`,
+        // make sure in the auth0 application is
+        redirect_uri: `${window.location.origin}/home`,
       },
     })
   }
@@ -28,7 +28,6 @@ function Nav(props: Props) {
 
   return (
     <nav className="pt-16 pl-4 flex">
-      I am in the Nav Bar
       <ul className="text-3xl">
         <li>
           <button onClick={() => goTo('/home')}>Home</button>

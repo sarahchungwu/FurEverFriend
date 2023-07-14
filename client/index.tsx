@@ -29,11 +29,11 @@ function AppProvider() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/dog" element={<MyDogPage />} />
+        <Route path="/dogs" element={<MyDogPage />} />
         <Route path="/dogs/new" element={<AddDogFormPage />} />
         {/* in the dog profile, should aslo can view MatchList */}
         <Route path="/dogs/:id" element={<DogProfilePage />} />
-        <Route path="/dogs/:id/matches" element={<MatchListPage />} />
+        <Route path="/dogs/matches" element={<MatchListPage />} />
         <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
         <Route path="/messages" element={<MassageListPage />} />
         <Route path="/messages/:id" element={<MassageDetailPage />} />
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
     <Auth0Provider
       domain="kahikatea-sarah.au.auth0.com"
-      clientId="qYdwyt2DojsUHKdKhsT1nXMevWefz9MX"
+      clientId="SgnYeotxVOop1HydEg5o6M2djY7rHK5z"
       cacheLocation="localstorage"
       authorizationParams={{
         audience: 'https://fureverfriend/api',
