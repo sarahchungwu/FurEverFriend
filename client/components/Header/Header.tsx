@@ -48,7 +48,7 @@ function Header() {
       )}
 
       <nav
-        className={`fixed  text-yellow-900 left-0 top-12 h-full w-full backdrop-filter backdrop-blur-md bg-opacity-5 shadow-transparent transition-all ease-in-out duration-200 ${
+        className={`fixed z-50 text-yellow-900 left-0 top-12 h-full w-full backdrop-filter backdrop-blur-md bg-opacity-5 shadow-transparent transition-all ease-in-out duration-200 ${
           navOpened ? 'opacity-100' : 'hidden'
         }`}
       >
