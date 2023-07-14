@@ -50,12 +50,12 @@ function RegisterPage() {
   return (
     <>
       <div className="mr-6">
-        <div className="text-center text-2xl font-semibold my-5">
+        <div className="text-center text-yellow-950 text-2xl font-medium my-14 ">
           <h2>Tell us about yourself</h2>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col drop-shadow-xl">
           <div className="flex flex-col ">
-            <label htmlFor="name" className="pl-7 pb-2 text-lg">
+            <label htmlFor="name" className="pl-7 pb-2 text-lg text-yellow-950">
               Your name
             </label>
             <input
@@ -65,41 +65,49 @@ function RegisterPage() {
               placeholder="e.g. Sarah"
               value={userData.name}
               onChange={handleChange}
-              className=" bg-lightPink flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              required
             />
           </div>
 
           <div className="flex flex-col ">
-            <label htmlFor="pronouns" className="pl-7 pb-2 text-lg">
+            <label
+              htmlFor="pronouns"
+              className="pl-7 pb-2 text-lg text-yellow-950"
+            >
               Pronouns
             </label>
             <input
               type="text"
+              id="pronouns"
               name="pronouns"
               placeholder="e.g. She/her, He/his, They/them"
               value={userData.pronouns}
               onChange={handleChange}
-              className=" bg-lightPink flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              required
             />
           </div>
 
           <div className="flex flex-col ">
-            <label htmlFor="bio" className="pl-7 pb-2 text-lg">
+            <label htmlFor="bio" className="pl-7 pb-2 text-lg text-yellow-950">
               Bio
             </label>
             <input
               type="text"
               name="bio"
+              id="bio"
               placeholder=""
               value={userData.bio}
               onChange={handleChange}
-              className=" bg-lightPink flex flex-row py-2 px-4 mb-6 ml-6 h-20 rounded-sm"
+              className=" flex flex-row py-2 px-4 mb-6 ml-6 h-20 rounded-sm"
+              required
             />
           </div>
 
           <button
             type="submit"
-            className="  bg-orange-200 
+            className=" bg-orange-200 
           shadow-lg  text-yellow-950
           justify-center text-center py-2 px-4 mb-6 ml-6 mt-10 rounded-lg  cursor-pointer hover:bg-orange-300
           focus:bg-orange-300 "
