@@ -1,13 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserData } from '../../../models/user'
 
 function RegisterPage() {
   const { user, getAccessTokenSilently } = useAuth0()
+  const navigate = useNavigate()
 
-  // calls the locations
-
-  // const navigate = useNavigate()
   const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
@@ -45,6 +44,7 @@ function RegisterPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     console.log('register form submitted', userData)
+    navigate('/home')
   }
 
   return (
