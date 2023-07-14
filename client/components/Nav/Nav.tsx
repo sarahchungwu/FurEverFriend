@@ -27,8 +27,8 @@ function Nav(props: Props) {
   }
 
   return (
-    <nav className="pt-16 pl-4 flex">
-      <ul className="text-3xl">
+    <nav className="pt-16 pl-4 flex ">
+      <ul className="text-3xl tracking-wide">
         <li>
           <button onClick={() => goTo('/home')}>Home</button>
         </li>
