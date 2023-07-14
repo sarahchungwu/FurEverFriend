@@ -18,6 +18,7 @@ import AddMatchPage from './Pages/MatchPage/AddMatchPage'
 import MatchListPage from './Pages/MatchPage/MatchListPage'
 import ProfilePage from './Pages/Profile/ProfilePage'
 import RegisterPage from './Pages/Profile/RegisterPage'
+import { Auth0Provider } from '@auth0/auth0-react'
 
 function AppProvider() {
   const routes = createBrowserRouter(
@@ -44,8 +45,18 @@ function AppProvider() {
 document.addEventListener('DOMContentLoaded', () => {
   const queryClient = new QueryClient()
   createRoot(document.getElementById('app') as HTMLElement).render(
-    <QueryClientProvider client={queryClient}>
-      <AppProvider />
-    </QueryClientProvider>,
+    <Auth0Provider
+      domain="kahikatea-sarah.au.auth0.com"
+      clientId="qYdwyt2DojsUHKdKhsT1nXMevWefz9MX"
+      cacheLocation="localstorage"
+      authorizationParams={{
+        audience: 'https://fureverfriend/api',
+        redirect_uri: window.location.origin,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <AppProvider />
+      </QueryClientProvider>
+    </Auth0Provider>,
   )
 })
