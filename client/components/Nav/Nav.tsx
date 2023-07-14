@@ -30,19 +30,32 @@ function Nav(props: Props) {
     <nav className="pt-16 pl-4 flex ">
       <ul className="text-3xl tracking-wide">
         <li>
-          <button onClick={() => goTo('/home')}>Home</button>
+          <button onClick={() => goTo('/home')} disabled={!isAuthenticated}>
+            Home
+          </button>
         </li>
         <li>
-          <button onClick={() => goTo('/dogs')}>My Dogs</button>
+          <button onClick={() => goTo('/dogs')} disabled={!isAuthenticated}>
+            My Dogs
+          </button>
         </li>
         <li>
-          <button onClick={() => goTo('/profile')}>My Profile</button>
+          <button onClick={() => goTo('/profile')} disabled={!isAuthenticated}>
+            My Profile
+          </button>
         </li>
         <li>
-          <button onClick={() => goTo('/dogs/matches')}>My Match</button>
+          <button
+            onClick={() => goTo('/dogs/matches')}
+            disabled={!isAuthenticated}
+          >
+            My Match
+          </button>
         </li>
         <li>
-          <button onClick={() => goTo('/messages')}>My message</button>
+          <button onClick={() => goTo('/messages')} disabled={!isAuthenticated}>
+            My message
+          </button>
         </li>
         <li>
           {!isAuthenticated && <button onClick={handleLogin}>Log in</button>}
