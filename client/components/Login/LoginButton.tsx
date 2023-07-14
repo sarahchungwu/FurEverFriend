@@ -13,7 +13,10 @@ function LoginButton() {
 
   return (
     // will later use the storty book for button to better work with UI design
-    <button className="bg-orange-600" onClick={handleLogin}>
+    <button
+      onClick={handleLogin}
+      className="flex gap-10 bg-red-300  text-rose-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-rose-400 "
+    >
       Log In
     </button>
   )
