@@ -5,8 +5,7 @@ import Header from '../Header/Header'
 function AppLayout() {
   return (
     <>
-      <div className="bg-red-300">
-        <h1>I am in the app Layout Page</h1>
+      <div className="min-h-screen  bg-orange-50">
         <Header />
         <Outlet />
       </div>

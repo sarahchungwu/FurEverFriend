@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useIsBusy } from '../../hooks/useIsBusy'
-import Logo from '../Logo'
+import Logo from '../Logo/Logo'
 import Nav from '../Nav/Nav'
 
 function Header() {
