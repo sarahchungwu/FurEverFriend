@@ -18,6 +18,8 @@ import AddMatchPage from './Pages/MatchPage/AddMatchPage'
 import MatchListPage from './Pages/MatchPage/MatchListPage'
 import ProfilePage from './Pages/Profile/ProfilePage'
 import RegisterPage from './Pages/Profile/RegisterPage'
+import { Auth0Provider } from '@auth0/auth0-react'
+import MyDogPage from './components/Dogs/MyDogPage'
 
 function AppProvider() {
   const routes = createBrowserRouter(
@@ -27,10 +29,11 @@ function AppProvider() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/dogs" element={<MyDogPage />} />
         <Route path="/dogs/new" element={<AddDogFormPage />} />
         {/* in the dog profile, should aslo can view MatchList */}
         <Route path="/dogs/:id" element={<DogProfilePage />} />
-        <Route path="/dogs/:id/matches" element={<MatchListPage />} />
+        <Route path="/dogs/matches" element={<MatchListPage />} />
         <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
         <Route path="/messages" element={<MassageListPage />} />
         <Route path="/messages/:id" element={<MassageDetailPage />} />
@@ -44,8 +47,18 @@ function AppProvider() {
 document.addEventListener('DOMContentLoaded', () => {
   const queryClient = new QueryClient()
   createRoot(document.getElementById('app') as HTMLElement).render(
-    <QueryClientProvider client={queryClient}>
-      <AppProvider />
-    </QueryClientProvider>,
+    <Auth0Provider
+      domain="kahikatea-sarah.au.auth0.com"
+      clientId="SgnYeotxVOop1HydEg5o6M2djY7rHK5z"
+      cacheLocation="localstorage"
+      authorizationParams={{
+        audience: 'https://fureverfriend/api',
+        redirect_uri: window.location.origin,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <AppProvider />
+      </QueryClientProvider>
+    </Auth0Provider>,
   )
 })
