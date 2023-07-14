@@ -34,7 +34,8 @@
     "framer-motion": "^10.12.21",
     "knex": "^2.3.0",
     "sqlite3": "^5.1.2",
-    "superagent": "7.1.1"
+    "superagent": "7.1.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@devacademy/eslint-config": "^1.8.0",
