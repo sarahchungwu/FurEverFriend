@@ -1,3 +1,5 @@
+import LoginButton from '../../components/Login/LoginButton'
+
 function LandingPage() {
   return (
     <>
@@ -9,7 +11,7 @@ function LandingPage() {
           <h1>Slogon</h1>
         </div>
         <div>
-          <button className="bg-lime-600">Sign up</button>
+          <LoginButton />
           <button className="bg-yellow-800">Login</button>
         </div>
       </div>
