@@ -9,7 +9,7 @@ function LandingPage() {
           <h1>Welcome to the FurEverPage</h1>
         </div>
         <div className="w-32 bg-indigo-400">
-          <h1>Slogon</h1>
+          <h1>Unite Dogs and Owners, Ignite Lifelong Friendships.</h1>
         </div>
         <div>
           <LoginButton />
