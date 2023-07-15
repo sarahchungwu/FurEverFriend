@@ -8,7 +8,7 @@ function AddDogFormPage() {
     name: '',
     img: '',
     breed: '',
-    age: 0,
+    age: -1,
     personality: '',
     description: '',
   })
@@ -35,7 +35,8 @@ function AddDogFormPage() {
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const name = event.target.name
-    const value = event.target.value
+    const value: string | number =
+      name === 'age' ? parseInt(event.target.value) : event.target.value
     const newDogData = { ...dogData, [name]: value }
     setDogData(newDogData)
   }
@@ -58,7 +59,7 @@ function AddDogFormPage() {
   return (
     <>
       <div className="mr-6 xl flex flex-col items-center ">
-        <div className="text-center text-yellow-950 text-2xl font-medium my-14 ">
+        <div className="text-center text-yellow-950 text-2xl font-medium my-14 w-72">
           <h2>Introduct Your Special Fur Baby to us</h2>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col drop-shadow-xl">
@@ -86,7 +87,7 @@ function AddDogFormPage() {
               type="text"
               name="age"
               placeholder="e.g. 2"
-              value={dogData.age}
+              value={dogData.age === -1 ? '' : dogData.age}
               onChange={handleChange}
               className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
               required

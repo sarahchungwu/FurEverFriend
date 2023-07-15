@@ -1,20 +1,20 @@
 import * as z from 'zod'
 
 export const userDraftSchema = z.object({
-  name: z.string(),
+  username: z.string(),
   email: z.string().email(),
   pronouns: z.string(),
   bio: z.string(),
 })
 
 export const userEditSchema = z.object({
-  name: z.string(),
+  username: z.string(),
   pronouns: z.string(),
   bio: z.string(),
 })
 
 export const usersDataBackendSchema = userDraftSchema.extend({
-  auth0_id: z.string(),
+  auth0Id: z.string(),
 })
 
 export type UpdateUsersData = z.infer<typeof userEditSchema>

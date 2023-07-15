@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'patrick-hand-sc': ['Patrick Hand SC', 'cursive'],
+        'style-script': ['Style Script', 'cursive'],
       },
     },
   },
