@@ -30,10 +30,9 @@ function LandingPage() {
           >
             FRIENDSHIPS.
           </motion.h1>
-          {/* <img src="../../../public/image/Dog1.png" alt="dogs" /> */}
           <motion.img
             src="../../../public/image/Dog1.png"
-            alt="My Image"
+            alt="dog image"
             initial={{ opacity: 0, translateY: -50, rotate: 0 }}
             animate={{ opacity: 1, translateY: 0, rotate: [-10, 10, -10, 10] }}
             transition={{ duration: 5, delay: 4 }}
