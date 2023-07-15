@@ -14,6 +14,7 @@ export async function getUserById(auth0Id: string) {
     )) as UsersDataBackend[]
 }
 
+// both add and update update user
 export async function upsertProfile(profile: UsersDataBackend) {
   await db('users')
     .insert({
