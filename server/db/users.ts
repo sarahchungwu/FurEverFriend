@@ -19,7 +19,7 @@ export async function upsertProfile(profile: UsersDataBackend) {
   await db('users')
     .insert({
       auth0_id: profile.auth0Id,
-      name: profile.name,
+      username: profile.username,
       email: profile.email,
       pronouns: profile.pronouns,
       bio: profile.bio,
