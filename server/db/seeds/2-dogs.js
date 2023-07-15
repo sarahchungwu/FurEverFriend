@@ -2,7 +2,7 @@ exports.seed = async function (knex) {
   await knex('dogs').insert([
     {
       id: 1,
-      user_id: 'google-oauth2|110655168',
+      user_id: 'google-oauth2|110655168501149628622',
       name: 'Bubble',
       img: 'https://cdn.pixabay.com/photo/2016/07/07/15/35/puppy-1502565_640.jpg',
       breed: 'Pug',
@@ -13,7 +13,7 @@ exports.seed = async function (knex) {
     },
     {
       id: 2,
-      user_id: 'google-oauth2|110655168',
+      user_id: 'google-oauth2|110655168501149628622',
       name: 'Buddy',
       img: 'bubble.jpg',
       breed: 'Labrador Retriever',
