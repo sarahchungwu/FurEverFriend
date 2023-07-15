@@ -52,3 +52,8 @@ export async function updateDogProfile(updateDog: DogsData, dogId: number) {
     description: updateDog.description,
   })
 }
+
+//delete the dogProfile
+export async function deleteDog(dogId: number, auth0Id: string) {
+  await db('dogs').where('id', dogId).where('user_id', auth0Id).delete()
+}

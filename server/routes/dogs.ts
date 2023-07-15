@@ -106,4 +106,24 @@ router.patch('/:id', validateAccessToken, async (req, res) => {
   }
 })
 
+//DELETE /api/v1/dogs/:id
+router.delete('/:id', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub
+  const dogId = Number(req.params.id)
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an id' })
+    return
+  }
+
+  try {
+    await db.deleteDog(dogId, auth0Id)
+    res.sendStatus(200)
+    return
+  } catch (error) {
+    logError(error)
+    res.status(500).json({ message: 'Unable to insert new user to database' })
+  }
+})
+
 export default router
