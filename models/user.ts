@@ -14,7 +14,7 @@ export const userEditSchema = z.object({
 })
 
 export const usersDataBackendSchema = userDraftSchema.extend({
-  auth0_id: z.string(),
+  auth0Id: z.string(),
 })
 
 export type UpdateUsersData = z.infer<typeof userEditSchema>
