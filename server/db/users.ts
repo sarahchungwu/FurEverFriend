@@ -1,4 +1,4 @@
-import { UsersDataBackend } from '../../models/user'
+import { UpdateUsersData, UsersDataBackend } from '../../models/user'
 import db from './connection'
 
 // use .first() instead of use .select().first()
@@ -14,7 +14,7 @@ export async function getUserById(auth0Id: string) {
     )) as UsersDataBackend[]
 }
 
-// both add and update update user
+//  add user
 export async function upsertProfile(profile: UsersDataBackend) {
   await db('users')
     .insert({
@@ -26,4 +26,13 @@ export async function upsertProfile(profile: UsersDataBackend) {
     })
     .onConflict('auth0_id')
     .merge()
+}
+
+//update the user
+export async function updateProfile(profile: UpdateUsersData, auth0Id: string) {
+  await db('users').where('auth0_id', auth0Id).update({
+    username: profile.username,
+    pronouns: profile.pronouns,
+    bio: profile.bio,
+  })
 }
