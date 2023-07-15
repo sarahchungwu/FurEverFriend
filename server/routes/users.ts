@@ -57,7 +57,7 @@ router.post('/', validateAccessToken, async (req, res) => {
   }
 })
 
-//update user
+// PATCH /api/v1/users
 
 router.patch('/', validateAccessToken, async (req, res) => {
   const form = req.body
