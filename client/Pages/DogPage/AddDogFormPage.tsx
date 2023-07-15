@@ -59,7 +59,7 @@ function AddDogFormPage() {
   return (
     <>
       <div className="mr-6 xl flex flex-col items-center ">
-        <div className="text-center text-yellow-950 text-2xl font-medium my-14 ">
+        <div className="text-center text-yellow-950 text-2xl font-medium my-14 w-72">
           <h2>Introduct Your Special Fur Baby to us</h2>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col drop-shadow-xl">
