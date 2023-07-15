@@ -9,6 +9,7 @@ export const dogsDraftSchema = z.object({
 })
 
 export const dogsDataBackendSchema = dogsDraftSchema.extend({
+  id: z.number(),
   user_id: z.string(),
 })
 
