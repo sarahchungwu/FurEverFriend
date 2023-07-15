@@ -40,3 +40,15 @@ export async function addNewDog(dogProfile: AddDogData) {
     description: dogProfile.description,
   })
 }
+
+//update the dog
+export async function updateDogProfile(updateDog: DogsData, dogId: number) {
+  await db('dogs').where('id', dogId).update({
+    name: updateDog.name,
+    img: updateDog.img,
+    breed: updateDog.breed,
+    age: updateDog.age,
+    personality: updateDog.personality,
+    description: updateDog.description,
+  })
+}
