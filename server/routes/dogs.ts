@@ -19,7 +19,7 @@ router.get('/', validateAccessToken, async (req, res) => {
     res.status(200).json(user)
   } catch (error) {
     logError(error)
-    res.status(500).json({ message: 'Unable to insert new user to database' })
+    res.status(500).json({ message: 'Unable to ge the data from database' })
   }
 })
 
@@ -71,7 +71,7 @@ router.post('/', validateAccessToken, async (req, res) => {
     res.sendStatus(201)
   } catch (e) {
     console.error(e)
-    res.status(500).json({ message: 'Unable to insert new user to database' })
+    res.status(500).json({ message: 'Unable to insert new dog to database' })
   }
 })
 
@@ -102,7 +102,7 @@ router.patch('/:id', validateAccessToken, async (req, res) => {
     res.sendStatus(201)
   } catch (e) {
     console.error(e)
-    res.status(500).json({ message: 'Unable to insert new user to database' })
+    res.status(500).json({ message: 'Unable to update dog in database' })
   }
 })
 
@@ -122,7 +122,27 @@ router.delete('/:id', validateAccessToken, async (req, res) => {
     return
   } catch (error) {
     logError(error)
-    res.status(500).json({ message: 'Unable to insert new user to database' })
+    res.status(500).json({ message: 'Unable to delete the data' })
+  }
+})
+
+//GET Matchlist of the Dog
+// /api/v1/dogs/:id/matches
+router.get('/:id/matches', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub
+  const dogId = Number(req.params.id)
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an id' })
+    return
+  }
+
+  try {
+    const user = await db.getMatchList(auth0Id, dogId)
+    res.status(200).json(user)
+  } catch (error) {
+    logError(error)
+    res.status(500).json({ message: 'Unable to ge the data from databasee' })
   }
 })
 
