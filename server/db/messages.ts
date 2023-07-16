@@ -38,6 +38,17 @@ export async function addNewMessage(newMessage: AddMessageToBackend) {
   })
 }
 
+export async function updateNewMessage(
+  id: number,
+  auth0Id: string,
+  isRead: boolean,
+) {
+  return await db('messages')
+    .where('id', id)
+    .where('receiver_id', auth0Id)
+    .update('is_read', isRead)
+}
+
 //delete the message
 export async function deleteDog(messageId: number, auth0Id: string) {
   await db('messages')

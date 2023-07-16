@@ -105,4 +105,32 @@ router.delete('/:id', validateAccessToken, async (req, res) => {
     res.status(500).json({ message: 'Unable to delete the data' })
   }
 })
+
+//update Massage as is_read to be true
+router.patch('/:id', validateAccessToken, async (req, res) => {
+  const form = req.body
+  const messageId = Number(req.params.id)
+  const auth0Id = req.auth?.payload.sub
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an auth0_id' })
+    return
+  }
+
+  if (!form) {
+    res.status(400).json({ message: 'Please provide a form' })
+    return
+  }
+
+  const { isRead } = form // Extract the isRead value from the form object
+
+  try {
+    await db.updateNewMessage(messageId, auth0Id, isRead)
+    res.sendStatus(201)
+  } catch (e) {
+    console.error(e)
+    res.status(500).json({ message: 'Unable to update message in database' })
+  }
+})
+
 export default router
