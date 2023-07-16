@@ -1,8 +1,8 @@
 exports.up = async function (knex) {
   await knex.schema.createTable('matches', (table) => {
     table.increments('id').primary()
-    table.integer('dog1_id').references('dogs.id')
-    table.integer('dog2_id').references('dogs.id')
+    table.string('user_id').references('users.auth0_id')
+    table.integer('matched_dog_id').references('dogs.id')
   })
 }
 
