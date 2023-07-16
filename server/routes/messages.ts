@@ -24,6 +24,27 @@ router.get('/', validateAccessToken, async (req, res) => {
   }
 })
 
+//GET messages by id  api/v1/messages/:id
+router.get('/:id', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub
+  const messageId = Number(req.params.id)
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an id' })
+    return
+  }
+
+  try {
+    const user = await db.getMessageById(messageId, auth0Id)
+    res.status(200).json(user)
+  } catch (error) {
+    logError(error)
+    res
+      .status(500)
+      .json({ message: 'Unable to get the message from the database' })
+  }
+})
+
 //POST messages api/v1/messages
 router.post('/', validateAccessToken, async (req, res) => {
   const form = req.body
@@ -63,5 +84,7 @@ router.post('/', validateAccessToken, async (req, res) => {
       .json({ message: 'Unable to insert new message to database' })
   }
 })
+
+//Delete Message
 
 export default router
