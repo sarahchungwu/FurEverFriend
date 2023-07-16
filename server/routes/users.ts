@@ -16,7 +16,7 @@ router.get('/', validateAccessToken, async (req, res) => {
 
   try {
     const user = await db.getUserById(auth0Id)
-    res.status(200).json(user)
+    res.status(200).json({ user })
   } catch (error) {
     logError(error)
     res.status(500).json({ message: 'Unable to insert new user to database' })

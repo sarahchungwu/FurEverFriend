@@ -8,7 +8,7 @@ function RegisterPage() {
   const navigate = useNavigate()
 
   const [userData, setUserData] = useState<UserData>({
-    name: '',
+    username: '',
     email: '',
     pronouns: '',
     bio: '',
@@ -63,7 +63,7 @@ function RegisterPage() {
               type="text"
               name="name"
               placeholder="e.g. Sarah"
-              value={userData.name}
+              value={userData.username}
               onChange={handleChange}
               className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
               required
