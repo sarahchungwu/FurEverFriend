@@ -3,12 +3,12 @@ import * as z from 'zod'
 export const addMessageDraftSchema = z.object({
   receiver_id: z.string(),
   text: z.string(),
-  sent_at: z.date(),
 })
 
 export const addMessageToBackendSchema = addMessageDraftSchema.extend({
-  userIsender_id: z.string(),
+  sender_id: z.string(),
   is_read: z.boolean(),
+  sent_at: z.date(),
 })
 
 export const messageFromBackendSchema = addMessageToBackendSchema.extend({
