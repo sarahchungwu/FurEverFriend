@@ -1,6 +1,14 @@
+import { MessageFromBackend } from '../../models/messages'
 import db from './connection'
 export async function getAllMessages(auth0Id: string) {
-  return await db('messages')
+  return (await db('messages')
     .where('receiver_id', auth0Id)
-    .select('id', 'sender_id', 'receiver_id', 'text', 'sent_at', 'is_read')
+    .select(
+      'id',
+      'sender_id',
+      'receiver_id',
+      'text',
+      'sent_at',
+      'is_read',
+    )) as MessageFromBackend[]
 }
