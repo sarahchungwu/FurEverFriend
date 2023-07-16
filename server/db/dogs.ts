@@ -1,5 +1,5 @@
 import { AddDogData, DogsData, DogsDataBackend } from '../../models/dog'
-import { MatchList } from '../../models/matches'
+import { AddMatchToBackend, MatchList } from '../../models/matches'
 import db from './connection'
 
 export async function getDogByUser(auth0Id: string) {
@@ -60,7 +60,6 @@ export async function deleteDog(dogId: number, auth0Id: string) {
 }
 
 //get the matchlist for the dog
-// in the matchList, i only want to show the image and name
 export async function getMatchList(auth0Id: string, dogId: number) {
   return (await db('matches')
     .join('dogs', 'dogs.id', 'matched_dog_id')
@@ -71,4 +70,14 @@ export async function getMatchList(auth0Id: string, dogId: number) {
       'dogs.id as matched_dog_id',
       'dogs.img as dog_img',
     )) as MatchList[]
+}
+
+//add Match to the table
+
+export async function addNewMatch(newMatch: AddMatchToBackend) {
+  return await db('matches').insert({
+    dog_id: newMatch.dogId,
+    user_id: newMatch.userId,
+    matched_dog_id: newMatch.matchedDogId,
+  })
 }
