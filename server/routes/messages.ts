@@ -87,4 +87,22 @@ router.post('/', validateAccessToken, async (req, res) => {
 
 //Delete Message
 
+router.delete('/:id', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub
+  const messageId = Number(req.params.id)
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an id' })
+    return
+  }
+
+  try {
+    await db.deleteDog(messageId, auth0Id)
+    res.sendStatus(200)
+    return
+  } catch (error) {
+    logError(error)
+    res.status(500).json({ message: 'Unable to delete the data' })
+  }
+})
 export default router

@@ -37,3 +37,11 @@ export async function addNewMessage(newMessage: AddMessageToBackend) {
     sent_at: newMessage.sent_at,
   })
 }
+
+//delete the message
+export async function deleteDog(messageId: number, auth0Id: string) {
+  await db('messages')
+    .where('id', messageId)
+    .where('receiver_id', auth0Id)
+    .delete()
+}
