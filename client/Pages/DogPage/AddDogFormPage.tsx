@@ -62,7 +62,10 @@ function AddDogFormPage() {
         <div className="text-center text-yellow-950 text-2xl font-medium my-14 w-72">
           <h2>Introduct Your Special Fur Baby to us</h2>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col drop-shadow-xl">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col drop-shadow-xl w-full"
+        >
           <div className="flex flex-col ">
             <label htmlFor="name" className="pl-7 pb-2 text-lg text-yellow-950">
               name:
