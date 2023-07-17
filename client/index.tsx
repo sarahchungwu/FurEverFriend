@@ -19,7 +19,7 @@ import MatchListPage from './Pages/MatchPage/MatchListPage'
 import ProfilePage from './Pages/Profile/ProfilePage'
 import RegisterPage from './Pages/Profile/RegisterPage'
 import { Auth0Provider } from '@auth0/auth0-react'
-import MyDogPage from './components/Dogs/MyDogPage'
+import MyDogPage from './Pages/DogPage/MyDogPage'
 import EditProfilePage from './Pages/Profile/EditProfilePage'
 
 function AppProvider() {

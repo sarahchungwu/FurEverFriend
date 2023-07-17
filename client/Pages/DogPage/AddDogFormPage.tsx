@@ -7,6 +7,7 @@ function AddDogFormPage() {
   const [dogData, setDogData] = useState<DogsData>({
     name: '',
     img: '',
+    gender: '',
     breed: '',
     age: -1,
     personality: '',
@@ -109,6 +110,24 @@ function AddDogFormPage() {
               name="breed"
               placeholder="e.g. pug"
               value={dogData.breed}
+              onChange={handleChange}
+              className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col ">
+            <label
+              htmlFor="gender"
+              className="pl-7 pb-2 text-lg text-yellow-950"
+            >
+              gender:
+            </label>
+            <input
+              id="gender"
+              type="text"
+              name="gender"
+              placeholder="e.g. female or Male"
+              value={dogData.gender}
               onChange={handleChange}
               className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
               required

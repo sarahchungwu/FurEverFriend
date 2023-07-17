@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
@@ -24,6 +24,19 @@ function MyDogPage() {
 
   return (
     <>
+      <div className="flex flex-row justify-end mr-9 mt-14">
+        <button
+          type="submit"
+          className=" bg-orange-200 w-12 h-12
+        shadow-lg  text-yellow-950
+        justify-center text-center  rounded-full  cursor-pointer hover:bg-orange-300
+        focus:bg-orange-300 transform transition-transform hover:scale-150"
+        >
+          <Link to="/dogs/new">
+            <FontAwesomeIcon icon={faPlus} className="text-3xl" />
+          </Link>
+        </button>
+      </div>
       {!dogQuery.isLoading &&
         dogQuery.data &&
         dogQuery.data.map((dog) => (
