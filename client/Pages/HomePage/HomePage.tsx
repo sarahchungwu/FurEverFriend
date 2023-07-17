@@ -2,12 +2,26 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
+import { DogsDataBackend } from '../../../models/dog'
+import { fetchDogsList } from '../../apis/dogs'
 import { fetchProfiles } from '../../apis/profile'
 import DogList from '../../components/Dogs/DogList'
 import NoDog from '../../components/Dogs/NoDog'
 
 function HomePage() {
   const { user, getAccessTokenSilently } = useAuth0()
+  const dogListQuery = useQuery({
+    queryKey: 'fetchDogsList',
+    queryFn: async () => {
+      const accessToken = await getAccessTokenSilently()
+      if (user && user.sub) {
+        const response = await fetchDogsList(accessToken)
+
+        return response as DogsDataBackend[]
+      }
+    },
+    enabled: !!user,
+  })
 
   const profileQuery = useQuery({
     queryKey: 'fetchProfiles',
@@ -32,7 +46,9 @@ function HomePage() {
         </div>
 
         <div className="flex flex-col first-line:w-5/6 items-center">
-          <DogList />
+          {!dogListQuery.isLoading && dogListQuery.data && (
+            <DogList data={dogListQuery.data} />
+          )}
           {/* <NoDog /> */}
         </div>
         <div>

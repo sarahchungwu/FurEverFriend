@@ -8,7 +8,6 @@ export async function fetchDogsList(token: string): Promise<DogsDataBackend[]> {
     .get(rootUrl + 'dogs')
     .set('Authorization', `Bearer ${token}`)
     .set('Content-Type', 'application/json')
-  console.log('I am in the dog api', res.body.dogs)
 
   return res.body.dogs
 }
