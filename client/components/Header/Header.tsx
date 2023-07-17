@@ -21,7 +21,7 @@ function Header() {
       {isBusy > 0 && (
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-20">
           <img
-            src="spinner.svg"
+            src="/image/loading_spinner.svg"
             alt="loading spinner"
             className="w-full h-full"
           />
