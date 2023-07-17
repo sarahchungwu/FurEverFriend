@@ -1,56 +1,41 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { UserData } from '../../../models/user'
-import { addProfile } from '../../apis/profile'
+import { UpdateUsersData, UserData } from '../../../models/user'
+import { updateProfile } from '../../apis/profile'
 
-function RegisterPage() {
-  const { user, getAccessTokenSilently } = useAuth0()
+function EditProfilePage() {
+  const { getAccessTokenSilently } = useAuth0()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<UpdateUsersData>({
     username: '',
-    email: '',
     pronouns: '',
     bio: '',
   })
 
   // data is called and then mutated
   const mutations = useMutation({
-    mutationFn: ({ userData, token }: { userData: UserData; token: string }) =>
-      addProfile(userData, token),
+    mutationFn: ({
+      userData,
+      token,
+    }: {
+      userData: UpdateUsersData
+      token: string
+    }) => updateProfile(userData, token),
     onSuccess: async () => {
-      // console.log('added, I am in the mutation')
+      console.log('added, I am in the update mutation')
       queryClient.invalidateQueries('fetchProfiles')
     },
   })
 
-  useEffect(() => {
-    if (user) {
-      Promise.resolve(user)
-        .then((resolvedUser) => {
-          if (resolvedUser.email && resolvedUser.sub) {
-            const userDraftData: UserData = {
-              ...userData,
-              email: resolvedUser.email,
-            }
-
-            setUserData(userDraftData)
-          }
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
-  }, [user])
-
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const name = event.target.name
     const value = event.target.value
-    const newUserData = { ...userData, [name]: value }
-    setUserData(newUserData)
+    const upDatedUserData = { ...userData, [name]: value }
+    setUserData(upDatedUserData)
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -65,7 +50,7 @@ function RegisterPage() {
     <>
       <div className="mr-6">
         <div className="text-center text-yellow-950 text-2xl font-medium my-14 ">
-          <h2>Tell us about yourself</h2>
+          <h2>UPDATE YOUR PROFILE</h2>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col drop-shadow-xl">
           <div className="flex flex-col ">
@@ -126,7 +111,7 @@ function RegisterPage() {
           justify-center text-center py-2 px-4 mb-6 ml-6 mt-10 rounded-lg  cursor-pointer hover:bg-orange-300
           focus:bg-orange-300 "
           >
-            Register
+            Update
           </button>
         </form>
       </div>
@@ -134,4 +119,4 @@ function RegisterPage() {
   )
 }
 
-export default RegisterPage
+export default EditProfilePage

@@ -11,7 +11,7 @@ export async function getUserById(auth0Id: string) {
       'email',
       'pronouns',
       'bio',
-    )) as UsersDataBackend[]
+    )) as UsersDataBackend
 }
 
 //  add user

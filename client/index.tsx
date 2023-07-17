@@ -20,6 +20,7 @@ import ProfilePage from './Pages/Profile/ProfilePage'
 import RegisterPage from './Pages/Profile/RegisterPage'
 import { Auth0Provider } from '@auth0/auth0-react'
 import MyDogPage from './components/Dogs/MyDogPage'
+import EditProfilePage from './Pages/Profile/EditProfilePage'
 
 function AppProvider() {
   const routes = createBrowserRouter(
@@ -29,6 +30,7 @@ function AppProvider() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/dogs" element={<MyDogPage />} />
         <Route path="/dogs/new" element={<AddDogFormPage />} />
         {/* in the dog profile, should aslo can view MatchList */}

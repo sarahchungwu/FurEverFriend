@@ -16,8 +16,8 @@ router.get('/', validateAccessToken, async (req, res) => {
   }
 
   try {
-    const user = await db.getDogByUser(auth0Id)
-    res.status(200).json(user)
+    const dogs = await db.getDogByUser(auth0Id)
+    res.status(200).json({ dogs })
   } catch (error) {
     logError(error)
     res.status(500).json({ message: 'Unable to ge the data from database' })
