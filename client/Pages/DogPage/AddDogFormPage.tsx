@@ -1,9 +1,14 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { DogsData } from '../../../models/dog'
+import { addDog } from '../../apis/dogs'
 
 function AddDogFormPage() {
   const navigate = useNavigate()
+  const { getAccessTokenSilently } = useAuth0()
+  const queryClient = useQueryClient()
   const [dogData, setDogData] = useState<DogsData>({
     name: '',
     img: '',
@@ -34,6 +39,16 @@ function AddDogFormPage() {
     // Add more dogs with their respective IDs and personality traits
   ]
 
+  // data is called and then mutated
+  const mutations = useMutation({
+    mutationFn: ({ dogData, token }: { dogData: DogsData; token: string }) =>
+      addDog(dogData, token),
+    onSuccess: async () => {
+      console.log('added dog, I am in the mutation')
+      queryClient.invalidateQueries('fetchDogsList')
+    },
+  })
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const name = event.target.name
     const value: string | number =
@@ -45,7 +60,9 @@ function AddDogFormPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     console.log('register form submitted', dogData)
-    navigate('/home')
+    const token = await getAccessTokenSilently()
+    mutations.mutate({ dogData, token })
+    navigate('/dogs')
   }
 
   function handleSelect(event: React.ChangeEvent<HTMLSelectElement>) {
