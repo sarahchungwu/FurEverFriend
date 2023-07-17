@@ -59,14 +59,15 @@ function HomePage() {
             )}
           </div>
         )}
-        <div className="flex flex-row justify-end mt-10 mr-16">
+        {/* thinking whether to keep it or not  */}
+        {/* <div className="flex flex-row justify-end mt-10 mr-16">
           <div className="mt-36 ">
             <FontAwesomeIcon
               icon={faCommentDots}
               className="text-5xl text-yellow-900 mb-5"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   )
