@@ -10,7 +10,7 @@ function DogList(props: Props) {
       <div className="flex flex-row flex-wrap justify-center gap-4 w-10/12">
         {dogListData.map((dog: DogsDataBackend) => (
           <div
-            className="w-2/3  text-yellow-950 bg-opacity-30 bg-orange-200 p-4 rounded-lg shadow-md pb-4 mb-8 pt-8"
+            className="w-2/3  text-yellow-950 bg-opacity-30 bg-orange-200 p-4 rounded-lg shadow-md pb-4 mb-8 pt-8 transform transition-transform hover:scale-125"
             key={dog.id}
           >
             <div className="text-center">
