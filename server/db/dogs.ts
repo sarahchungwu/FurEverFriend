@@ -7,6 +7,7 @@ export async function getDogByUser(auth0Id: string) {
     .where('user_id', auth0Id)
     .select(
       'id',
+      'user_id',
       'name',
       'img',
       'breed',
