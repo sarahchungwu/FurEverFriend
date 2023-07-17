@@ -1,11 +1,14 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { UserData } from '../../../models/user'
+import { addProfile } from '../../apis/profile'
 
 function RegisterPage() {
   const { user, getAccessTokenSilently } = useAuth0()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const [userData, setUserData] = useState<UserData>({
     username: '',
@@ -15,6 +18,15 @@ function RegisterPage() {
   })
 
   // data is called and then mutated
+  const mutations = useMutation({
+    mutationFn: ({ userData, token }: { userData: UserData; token: string }) =>
+      addProfile(userData, token),
+    onSuccess: async () => {
+      // console.log('added, I am in the mutation')
+      queryClient.invalidateQueries('fetchProfiles')
+    },
+  })
+
   useEffect(() => {
     if (user) {
       Promise.resolve(user)
@@ -43,7 +55,9 @@ function RegisterPage() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log('register form submitted', userData)
+    // console.log('register form submitted', userData)
+    const token = await getAccessTokenSilently()
+    mutations.mutate({ userData, token })
     navigate('/home')
   }
 
@@ -61,7 +75,7 @@ function RegisterPage() {
             <input
               id="name"
               type="text"
-              name="name"
+              name="username"
               placeholder="e.g. Sarah"
               value={userData.username}
               onChange={handleChange}

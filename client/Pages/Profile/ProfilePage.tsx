@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { faHeart, faPen, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
