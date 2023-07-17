@@ -38,6 +38,7 @@ export async function addNewDog(dogProfile: AddDogData) {
     name: dogProfile.name,
     img: dogProfile.img,
     breed: dogProfile.breed,
+    gender: dogProfile.gender,
     age: dogProfile.age,
     personality: dogProfile.personality,
     description: dogProfile.description,
