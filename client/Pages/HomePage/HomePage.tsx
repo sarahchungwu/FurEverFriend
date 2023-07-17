@@ -51,14 +51,14 @@ function HomePage() {
           )}
           {/* <NoDog /> */}
         </div>
-        <div>
+        <div className="flex flex-col items-center mt-10">
           <button className="flex gap-10 bg-orange-200 shadow-lg  text-yellow-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-orange-300 focus:bg-orange-300 ">
             start a Match
           </button>
-          <button className="flex gap-10 bg-orange-200 shadow-lg  text-yellow-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-orange-300 focus:bg-orange-300 ">
+          {/* <button className="flex gap-10 bg-orange-200 shadow-lg  text-yellow-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-orange-300 focus:bg-orange-300 ">
             View match
-          </button>
-          <div>
+          </button> */}
+          <div className="mt-36">
             <FontAwesomeIcon icon={faEnvelope} />
           </div>
         </div>

@@ -11,6 +11,7 @@ export async function getDogByUser(auth0Id: string) {
       'name',
       'img',
       'breed',
+      'gender',
       'age',
       'personality',
       'description',
