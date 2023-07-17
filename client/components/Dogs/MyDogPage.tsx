@@ -61,7 +61,7 @@ function MyDogPage() {
         justify-center text-center py-2 px-4 mb-6 mt-6 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
             >
-              <Link to="/profile/edit">
+              <Link to={`/dogs/${dog.id}`}>
                 Edit
                 <FontAwesomeIcon icon={faPen} className="ml-3" />
               </Link>
