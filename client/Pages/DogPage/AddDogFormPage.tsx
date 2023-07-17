@@ -44,7 +44,6 @@ function AddDogFormPage() {
     mutationFn: ({ dogData, token }: { dogData: DogsData; token: string }) =>
       addDog(dogData, token),
     onSuccess: async () => {
-      console.log('added dog, I am in the mutation')
       queryClient.invalidateQueries('fetchDogsList')
     },
   })
@@ -59,9 +58,9 @@ function AddDogFormPage() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log('register form submitted', dogData)
     const token = await getAccessTokenSilently()
     mutations.mutate({ dogData, token })
+
     navigate('/dogs')
   }
 

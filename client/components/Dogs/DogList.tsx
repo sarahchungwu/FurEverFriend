@@ -15,8 +15,8 @@ function DogList(props: Props) {
           >
             <div className="text-center">
               <img
-                src={`${dog.img}`}
-                alt={`${dog.name}`}
+                src={dog.img ? `${dog.img} ` : '/image/defalutDogImg.png'}
+                alt={`${dog.name} `}
                 className="w-4/5 h- object-cover mx-auto rounded-lg"
               />
               <h2 className="text-l font-normal mt-2 ">{dog.name}</h2>

@@ -20,7 +20,6 @@ function MyDogPage() {
     },
     enabled: !!user,
   })
-  console.log('I am in the dogPage', dogQuery.data)
 
   return (
     <>
@@ -46,8 +45,8 @@ function MyDogPage() {
           >
             <div className="w-40 h-40 rounded-full mx-auto overflow-hidden shadow-md mt-8 mb-8 ">
               <img
-                src={`${dog.img}`}
-                alt="Profile"
+                src={dog.img ? `${dog.img} ` : '/image/defalutDogImg.png'}
+                alt={`${dog.name} `}
                 className="w-full h-full object-cover"
               />
             </div>
