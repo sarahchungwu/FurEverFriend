@@ -16,7 +16,7 @@ exports.seed = async function (knex) {
       id: 2,
       user_id: 'google-oauth2|110655168501149628622',
       name: 'Buddy',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/800px-Labrador_on_Quantock_%282175262184%29.jpg',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStUPOdC988ZGsYfR9cLqrRw34-WuLlWZJd9A&usqp=CAU',
       breed: 'Labrador Retriever',
       gender: 'male',
       age: 2,
