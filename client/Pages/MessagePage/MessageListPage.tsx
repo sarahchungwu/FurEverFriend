@@ -1,11 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import {
-  faCommentDots,
-  faEnvelope,
-  faEnvelopeOpen,
-} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 import { fetchMessagesList } from '../../apis/messages'
 
 function MessageListPage() {
@@ -24,8 +21,6 @@ function MessageListPage() {
     enabled: !!user,
   })
 
-  console.log('I am the messageQuery', messageQuery.data)
-
   return (
     <>
       <div className="min-h-screen p-8 text-yellow-950">
@@ -34,15 +29,12 @@ function MessageListPage() {
           {!messageQuery.isLoading &&
             messageQuery.data &&
             messageQuery.data.map((message) => (
-              <div key={message.id}>
-                <li>
-                  <div className=" bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl font-bold mb-4 text-center">
+              <li key={message.id}>
+                <Link to={`/messages/${message.id}`}>
+                  <div className=" bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10">
+                    <h2 className="flex flex-row justify-start text-2xl font-bold mb-4 text-center ">
                       {message.sender_name}
                     </h2>
-                    <p className="text-yellow-950 text-xl mb-5">
-                      {message.text}
-                    </p>
 
                     <div className="flex flex-row justify-end">
                       <p className="text-gray-600 mr-4">
@@ -61,8 +53,8 @@ function MessageListPage() {
                       )}
                     </div>
                   </div>
-                </li>
-              </div>
+                </Link>
+              </li>
             ))}
         </ul>
       </div>
