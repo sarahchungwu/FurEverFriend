@@ -26,10 +26,11 @@ export async function getDogById(dogId: number, auth0Id: string) {
       'name',
       'img',
       'breed',
+      'gender',
       'age',
       'personality',
       'description',
-    )) as DogsData[]
+    )) as DogsData
 }
 
 export async function addNewDog(dogProfile: AddDogData) {
