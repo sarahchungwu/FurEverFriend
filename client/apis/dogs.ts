@@ -43,3 +43,10 @@ export async function updateDog(
     .set('Content-Type', 'application/json')
     .send(updatedDog)
 }
+
+export async function deleteDog(token: string, dogId: number): Promise<void> {
+  await request
+    .delete(rootUrl + `dogs/${dogId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+}
