@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { DogsDataBackend } from '../../../models/dog'
 
 interface Props {
@@ -14,11 +15,13 @@ function DogList(props: Props) {
             key={dog.id}
           >
             <div className="text-center">
-              <img
-                src={dog.img ? `${dog.img} ` : '/image/defalutDogImg.png'}
-                alt={`${dog.name} `}
-                className="w-4/5 h- object-cover mx-auto rounded-lg"
-              />
+              <Link to={`/dogs/${dog.id}`}>
+                <img
+                  src={dog.img ? `${dog.img} ` : '/image/defalutDogImg.png'}
+                  alt={`${dog.name} `}
+                  className="w-4/5 h- object-cover mx-auto rounded-lg"
+                />
+              </Link>
               <h2 className="text-l font-normal mt-2 ">{dog.name}</h2>
             </div>
           </div>

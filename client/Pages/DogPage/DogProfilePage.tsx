@@ -74,9 +74,6 @@ function DogProfilePage() {
     // Add more dogs with their respective IDs and personality traits
   ]
 
-  const currentDogData = individualQuery.data
-  console.log('Im in the curretData', currentDogData)
-
   // data is called and then mutated
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -92,7 +89,7 @@ function DogProfilePage() {
     const token = await getAccessTokenSilently()
     mutations.mutate({ dogData, token, dogId })
 
-    navigate('/dogs')
+    navigate('/home')
   }
 
   function handleSelect(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -237,7 +234,7 @@ function DogProfilePage() {
           justify-center text-center py-2 px-4 mb-6 ml-6 mt-10 rounded-lg  cursor-pointer hover:bg-orange-300
           focus:bg-orange-300 "
           >
-            Submit
+            Save
           </button>
         </form>
       </div>
