@@ -39,7 +39,7 @@ function AppProvider() {
         <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
         <Route path="/messages" element={<MassageListPage />} />
         <Route path="/messages/:id" element={<MassageDetailPage />} />
-        <Route path="/messages/add" element={<MassageFormPage />} />
+        <Route path="/messages/:id/add" element={<MassageFormPage />} />
       </Route>,
     ),
   )

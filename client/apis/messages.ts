@@ -13,3 +13,15 @@ export async function fetchMessagesList(
 
   return res.body as MessageFromBackend[]
 }
+
+export async function fetchMessageById(
+  token: string,
+  messageId: number,
+): Promise<MessageFromBackend> {
+  const res = await request
+    .get(rootUrl + `messages/${messageId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+
+  return res.body
+}
