@@ -6,7 +6,7 @@ export const addMessageDraftSchema = z.object({
 })
 
 export const addMessageToBackendSchema = addMessageDraftSchema.extend({
-  sender_id: z.string(),
+  sender_name: z.string(),
   is_read: z.boolean(),
   sent_at: z.date(),
 })

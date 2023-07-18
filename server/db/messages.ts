@@ -3,10 +3,11 @@ import db from './connection'
 
 export async function getAllMessages(auth0Id: string) {
   return (await db('messages')
+    .join('users', 'users.auth0_id', 'messages.sender_id')
     .where('receiver_id', auth0Id)
     .select(
       'id',
-      'sender_id',
+      'users.username as sender_name',
       'receiver_id',
       'text',
       'sent_at',

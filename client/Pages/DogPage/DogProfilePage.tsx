@@ -38,6 +38,7 @@ function DogProfilePage() {
       // Save the data to state when the query succeeds.
     },
   })
+  console.log('I am the individualQuery', individualQuery)
 
   const mutations = useMutation({
     mutationFn: ({
