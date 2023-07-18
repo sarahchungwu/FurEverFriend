@@ -10,7 +10,15 @@ function DogProfilePage() {
   const { user, getAccessTokenSilently } = useAuth0()
   const queryClient = useQueryClient()
   const dogId = Number(useParams().id)
-  const [dogData, setDogData] = useState<DogsData>({} as DogsData)
+  const [dogData, setDogData] = useState<DogsData>({
+    name: '',
+    img: '',
+    gender: '',
+    breed: '',
+    age: -1,
+    personality: '',
+    description: '',
+  } as DogsData)
 
   const individualQuery = useQuery({
     queryKey: 'fetchDogById',
@@ -43,7 +51,6 @@ function DogProfilePage() {
     }) => updateDog(dogData, token, dogId),
     onSuccess: async () => {
       queryClient.invalidateQueries('fetchDogsList')
-      console.log('I am in the update mutation')
     },
   })
 
