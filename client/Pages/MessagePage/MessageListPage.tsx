@@ -1,5 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCommentDots,
+  faEnvelope,
+  faEnvelopeOpen,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
 import { fetchMessagesList } from '../../apis/messages'
@@ -36,15 +40,25 @@ function MessageListPage() {
                     <h2 className="text-xl font-bold mb-4 text-center">
                       {message.sender_name}
                     </h2>
-                    <p className="text-gray-600">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Sed et dolor vel libero dapibus mollis ut at elit.
+                    <p className="text-yellow-950 text-xl mb-5">
+                      {message.text}
                     </p>
+
                     <div className="flex flex-row justify-end">
-                      <FontAwesomeIcon
-                        icon={faCommentDots}
-                        className="text-3xl"
-                      />
+                      <p className="text-gray-600 mr-4">
+                        {new Date(message.sent_at).toLocaleString()}
+                      </p>
+                      {message.is_read ? (
+                        <FontAwesomeIcon
+                          icon={faEnvelopeOpen}
+                          className="text-2xl"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faEnvelope}
+                          className="text-2xl"
+                        />
+                      )}
                     </div>
                   </div>
                 </li>
