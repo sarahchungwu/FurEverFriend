@@ -25,6 +25,7 @@ export async function getMessageById(messageId: number, auth0Id: string) {
       'id',
       'users.username as sender_name',
       'receiver_id',
+      'sender_id',
       'text',
       'sent_at',
       'is_read',

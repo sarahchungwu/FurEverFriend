@@ -1,13 +1,19 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import { useState } from 'react'
 import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
-import { MessageFromBackend } from '../../../models/messages'
+import { useNavigate, useParams } from 'react-router-dom'
+import { AddMessage, MessageFromBackend } from '../../../models/messages'
 import { fetchMessageById } from '../../apis/messages'
 
 function MessageFormPage() {
   const { user, getAccessTokenSilently } = useAuth0()
+  const navigate = useNavigate()
   const messageId = Number(useParams().id)
-  // const [messageData, setMessageData] = useState<>
+  const [messageData, setMessageData] = useState<AddMessage>({
+    receiver_id: '',
+    text: '',
+  })
+
   const messageQuery = useQuery({
     queryKey: 'fetchDogById',
     queryFn: async () => {
@@ -19,40 +25,68 @@ function MessageFormPage() {
       }
     },
     enabled: !!user,
+    onSuccess: (data) => {
+      if (data) {
+        setMessageData((prev) => ({
+          ...prev,
+          receiver_id: data.sender_id,
+        }))
+      }
+    },
   })
 
-  console.log('I am in the FormPage', messageQuery.data)
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const name = event.target.name
+    const value = event.target.value
+    const newMessageData = { ...messageData, [name]: value }
+    setMessageData(newMessageData)
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const token = await getAccessTokenSilently()
+    // mutations.mutate({ userData, token })
+
+    // will navigate to Thankyou page later
+    navigate('/home')
+  }
 
   return (
     <>
       {!messageQuery.isLoading && messageQuery.data && (
         <div className="min-h-screen p-8 text-yellow-950 flex flex-col items-center">
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="bio"
-              className=" pb-2 text-2xl text-yellow-950 font-bold mt-8"
-            >
-              your reply to {messageQuery.data.sender_name}
-            </label>
-            <input
-              type="text"
-              name="text"
-              id="text"
-              placeholder="your reply message"
-              value=""
-              className=" flex flex-row  bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className=" bg-orange-200  
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col drop-shadow-xl items-center"
+          >
+            <div className="flex flex-col items-center">
+              <label
+                htmlFor="bio"
+                className=" pb-2 text-2xl text-yellow-950 font-bold mt-8"
+              >
+                your reply to {messageQuery.data.sender_name}
+              </label>
+              <input
+                type="text"
+                name="text"
+                id="text"
+                placeholder="your reply message"
+                value={messageData.text}
+                onChange={handleChange}
+                className=" flex flex-row  bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className=" bg-orange-200  
         shadow-lg  text-yellow-950 w-2/6
         justify-center text-center py-2 px-4 mb-6 mt-6 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
-          >
-            Send
-          </button>
+            >
+              Send
+            </button>
+          </form>
         </div>
       )}
     </>
