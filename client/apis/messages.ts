@@ -1,5 +1,9 @@
 import request from 'superagent'
-import { AddMessage, MessageFromBackend } from '../../models/messages'
+import {
+  AddMessage,
+  MessageFromBackend,
+  UpdateMessageStatus,
+} from '../../models/messages'
 
 const rootUrl = '/api/v1/'
 
@@ -35,4 +39,16 @@ export async function addMessage(
     .set('Authorization', `Bearer ${token}`)
     .set('Content-Type', 'application/json')
     .send(newMessage)
+}
+
+export async function updateMessageStatus(
+  messageId: number,
+  newStatus: UpdateMessageStatus,
+  token: string,
+): Promise<void> {
+  await request
+    .patch(rootUrl + `messages/${messageId}`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+    .send(newStatus)
 }

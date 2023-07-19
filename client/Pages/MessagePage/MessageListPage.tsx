@@ -1,12 +1,16 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
-import { fetchMessagesList } from '../../apis/messages'
+import { UpdateMessageStatus } from '../../../models/messages'
+import { fetchMessagesList, updateMessageStatus } from '../../apis/messages'
 
 function MessageListPage() {
   const { user, getAccessTokenSilently } = useAuth0()
+  const queryClient = useQueryClient()
+
+  const newStatus = { isRead: true }
 
   const messageQuery = useQuery({
     queryKey: 'fetchMessagesList',
@@ -21,6 +25,30 @@ function MessageListPage() {
     enabled: !!user,
   })
 
+  const mutations = useMutation({
+    mutationFn: ({
+      messageId,
+      newStatus,
+      token,
+    }: {
+      messageId: number
+      newStatus: UpdateMessageStatus
+      token: string
+    }) => updateMessageStatus(messageId, newStatus, token),
+    onSuccess: async () => {
+      console.log('added, I am in the update mutation')
+      queryClient.invalidateQueries('fetchMessagesList')
+    },
+  })
+
+  async function handleClick(messageId: number, isRead: boolean) {
+    if (!isRead) {
+      const token = await getAccessTokenSilently()
+
+      mutations.mutate({ messageId, token, newStatus })
+    }
+  }
+
   return (
     <>
       <div className="min-h-screen p-8 text-yellow-950">
@@ -30,7 +58,10 @@ function MessageListPage() {
             messageQuery.data &&
             messageQuery.data.map((message) => (
               <li key={message.id}>
-                <Link to={`/messages/${message.id}`}>
+                <Link
+                  to={`/messages/${message.id}`}
+                  onClick={() => handleClick(message.id, message.is_read)}
+                >
                   <div className=" bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10">
                     <h2 className="flex flex-row justify-start text-2xl font-bold mb-4 text-center ">
                       {message.sender_name}
