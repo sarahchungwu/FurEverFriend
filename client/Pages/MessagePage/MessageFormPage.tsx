@@ -72,7 +72,7 @@ function MessageFormPage() {
         <div className="min-h-screen p-8 text-yellow-950 flex flex-col items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col drop-shadow-xl items-center"
+            className="flex flex-col drop-shadow-xl items-center h-3/4"
           >
             <div className="flex flex-col items-center">
               <label
@@ -88,7 +88,7 @@ function MessageFormPage() {
                 placeholder="your reply message"
                 value={messageData.text}
                 onChange={handleChange}
-                className=" flex flex-row  bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10"
+                className=" flex flex-row h-52 bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10"
                 required
               />
             </div>
@@ -96,7 +96,7 @@ function MessageFormPage() {
               type="submit"
               className=" bg-orange-200  
         shadow-lg  text-yellow-950 w-2/6
-        justify-center text-center py-2 px-4 mb-6 mt-6 rounded-lg  cursor-pointer hover:bg-orange-300
+        justify-center text-center py-2 px-4 mb-6 mt-10 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
             >
               Send
