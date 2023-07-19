@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { AddMessageToBackend, MessageFromBackend } from '../../models/messages'
+import { AddMessage, MessageFromBackend } from '../../models/messages'
 
 const rootUrl = '/api/v1/'
 
@@ -27,7 +27,7 @@ export async function fetchMessageById(
 }
 
 export async function addMessage(
-  newMessage: AddMessageToBackend,
+  newMessage: AddMessage,
   token: string,
 ): Promise<void> {
   await request

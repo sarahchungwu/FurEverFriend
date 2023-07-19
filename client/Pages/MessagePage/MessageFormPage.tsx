@@ -1,14 +1,15 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AddMessage, MessageFromBackend } from '../../../models/messages'
-import { fetchMessageById } from '../../apis/messages'
+import { addMessage, fetchMessageById } from '../../apis/messages'
 
 function MessageFormPage() {
   const { user, getAccessTokenSilently } = useAuth0()
   const navigate = useNavigate()
   const messageId = Number(useParams().id)
+  const queryClient = useQueryClient()
   const [messageData, setMessageData] = useState<AddMessage>({
     receiver_id: '',
     text: '',
@@ -35,6 +36,20 @@ function MessageFormPage() {
     },
   })
 
+  const mutations = useMutation({
+    mutationFn: ({
+      messageData,
+      token,
+    }: {
+      messageData: AddMessage
+      token: string
+    }) => addMessage(messageData, token),
+    onSuccess: async () => {
+      console.log('added, I am in message the mutation')
+      queryClient.invalidateQueries('fetchMessagesList')
+    },
+  })
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const name = event.target.name
     const value = event.target.value
@@ -45,7 +60,7 @@ function MessageFormPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const token = await getAccessTokenSilently()
-    // mutations.mutate({ userData, token })
+    mutations.mutate({ messageData, token })
 
     // will navigate to Thankyou page later
     navigate('/home')
