@@ -36,7 +36,6 @@ function MessageListPage() {
       token: string
     }) => updateMessageStatus(messageId, newStatus, token),
     onSuccess: async () => {
-      console.log('added, I am in the update mutation')
       queryClient.invalidateQueries('fetchMessagesList')
     },
   })
