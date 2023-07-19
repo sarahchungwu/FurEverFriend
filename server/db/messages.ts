@@ -7,6 +7,7 @@ export async function getAllMessages(auth0Id: string) {
     .where('receiver_id', auth0Id)
     .select(
       'id',
+      'sender_id',
       'users.username as sender_name',
       'receiver_id',
       'text',
