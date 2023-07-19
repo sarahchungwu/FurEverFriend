@@ -74,6 +74,9 @@ export async function getMatchList(auth0Id: string, dogId: number) {
       'dogs.name as dog_name',
       'dogs.id as matched_dog_id',
       'dogs.img as dog_img',
+      'dogs.gender as dog_gender',
+      'dogs.personality as dog_personality',
+      'dogs.description as dog_description',
       'users.username as matched_username',
       'users.auth0_id as matched_user_id',
     )) as MatchList[]
