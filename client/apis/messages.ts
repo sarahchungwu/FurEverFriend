@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { MessageFromBackend } from '../../models/messages'
+import { AddMessageToBackend, MessageFromBackend } from '../../models/messages'
 
 const rootUrl = '/api/v1/'
 
@@ -24,4 +24,15 @@ export async function fetchMessageById(
     .set('Content-Type', 'application/json')
 
   return res.body
+}
+
+export async function addMessage(
+  newMessage: AddMessageToBackend,
+  token: string,
+): Promise<void> {
+  await request
+    .post(rootUrl + 'messages')
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+    .send(newMessage)
 }
