@@ -23,9 +23,6 @@ function MatchListPage() {
     enabled: !!user,
   })
 
-  if (dogListQuery.isLoading) return 'Loading...'
-  console.log('I am the dogList', dogListQuery.data)
-
   // const matchQuery = useQuery({
   //   queryKey: 'fetchMatchList',
   //   queryFn: async () => {
@@ -47,7 +44,9 @@ function MatchListPage() {
 
   return (
     <>
-      <MatchList />
+      {!dogListQuery.isLoading && dogListQuery.data && (
+        <MatchList data={dogListQuery.data} />
+      )}
     </>
   )
 }

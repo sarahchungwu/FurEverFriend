@@ -1,4 +1,13 @@
-function MatchList() {
+import { DogsDataBackend } from '../../../models/dog'
+
+interface Props {
+  data: DogsDataBackend[]
+}
+
+function MatchList(props: Props) {
+  const dogListData = props.data
+  console.log('I am in the DogList Data', dogListData)
+
   return (
     <div className="profile-container mx-auto max-w-md p-8 text-center flex flex-col items-center mb-5 mt-8 w-10/12 bg-white rounded-lg bg-opacity-70">
       <h1 className="pt-3 text-3xl  text-yellow-950">Hey, meet the dog</h1>
