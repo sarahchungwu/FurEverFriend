@@ -49,6 +49,7 @@ function MatchListPage() {
           <p>Age:</p>
           <p>Breed:</p>
           <p>Gender:</p>
+          <p>Pesonality:</p>
         </div>
         <div className=" p-4 mt-3 rounded-l-md shadow-md w-9/12 bg-orange-200 bg-opacity-50">
           <div className="h-40 p-2 text-lg text-yellow-950 ">
