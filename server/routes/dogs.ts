@@ -139,7 +139,7 @@ router.get('/:id/matches', validateAccessToken, async (req, res) => {
   }
 
   try {
-    const user = await db.getMatchList(auth0Id, dogId)
+    const user = await db.getMatchList(dogId)
     res.status(200).json(user)
   } catch (error) {
     logError(error)

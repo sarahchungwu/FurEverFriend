@@ -64,11 +64,10 @@ export async function deleteDog(dogId: number, auth0Id: string) {
 }
 
 //get the matchlist for the dog
-export async function getMatchList(auth0Id: string, dogId: number) {
+export async function getMatchList(dogId: number) {
   return (await db('matches')
     .join('dogs', 'dogs.id', 'matched_dog_id')
     .join('users', 'users.auth0_id', 'matches.user_id')
-    .where('matches.user_id', auth0Id)
     .where('dog_id', dogId)
     .select(
       'dogs.name as dog_name',
