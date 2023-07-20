@@ -1,4 +1,7 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { useQuery } from 'react-query'
 import { DogsDataBackend } from '../../../models/dog'
+import { fetchMatchList } from '../../apis/matches'
 
 interface Props {
   data: DogsDataBackend[]
@@ -6,7 +9,26 @@ interface Props {
 
 function MatchList(props: Props) {
   const dogListData = props.data
+  const { user, getAccessTokenSilently } = useAuth0()
   console.log('I am in the DogList Data', dogListData)
+  const matchQuery = useQuery({
+    queryKey: ['fetchMatchList', dogListData],
+    queryFn: async () => {
+      const accessToken = await getAccessTokenSilently()
+      if (user && user.sub && dogListData.length > 0) {
+        const responses = await Promise.all(
+          dogListData.map(async (dog) => {
+            const response = await fetchMatchList(accessToken, dog.id)
+            return response
+          }),
+        )
+        return responses
+      }
+    },
+    enabled: !!user && dogListData.length > 0,
+  })
+
+  console.log('I am the dogMatch dog', matchQuery.data)
 
   return (
     <div className="profile-container mx-auto max-w-md p-8 text-center flex flex-col items-center mb-5 mt-8 w-10/12 bg-white rounded-lg bg-opacity-70">

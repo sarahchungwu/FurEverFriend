@@ -23,19 +23,6 @@ function MatchListPage() {
     enabled: !!user,
   })
 
-  // const matchQuery = useQuery({
-  //   queryKey: 'fetchMatchList',
-  //   queryFn: async () => {
-  //     const accessToken = await getAccessTokenSilently()
-  //     if (user && user.sub) {
-  //       const response = await fetchMatchList(accessToken, dogId)
-
-  //       return response
-  //     }
-  //   },
-  //   enabled: !!user,
-  // })
-
   // async function handleDelete(dogId: number) {
   //   const token = await getAccessTokenSilently()
   //   await deleteDog(token, dogId)
