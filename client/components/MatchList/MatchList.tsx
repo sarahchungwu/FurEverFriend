@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 import { DogsDataBackend } from '../../../models/dog'
 import { fetchMatchList } from '../../apis/matches'
 
@@ -73,9 +74,9 @@ function MatchList(props: Props) {
         justify-center text-center py-2 px-4 mb-6 mt-8 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
           >
-            {/* <Link to={`/messages/${messageQuery.data.id}/add`}> */}
-
-            <FontAwesomeIcon icon={faEnvelope} className=" text-3xl" />
+            <Link to={`/dogs/matches/${matchDog.matched_dog_id}`}>
+              <FontAwesomeIcon icon={faEnvelope} className=" text-3xl" />
+            </Link>
           </button>
         </div>
       ))}
