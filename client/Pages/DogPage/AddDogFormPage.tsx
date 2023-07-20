@@ -1,12 +1,18 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { DogsData } from '../../../models/dog'
+import { addDog } from '../../apis/dogs'
 
 function AddDogFormPage() {
   const navigate = useNavigate()
+  const { getAccessTokenSilently } = useAuth0()
+  const queryClient = useQueryClient()
   const [dogData, setDogData] = useState<DogsData>({
     name: '',
     img: '',
+    gender: '',
     breed: '',
     age: -1,
     personality: '',
@@ -33,6 +39,15 @@ function AddDogFormPage() {
     // Add more dogs with their respective IDs and personality traits
   ]
 
+  // data is called and then mutated
+  const mutations = useMutation({
+    mutationFn: ({ dogData, token }: { dogData: DogsData; token: string }) =>
+      addDog(dogData, token),
+    onSuccess: async () => {
+      queryClient.invalidateQueries('fetchDogsList')
+    },
+  })
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const name = event.target.name
     const value: string | number =
@@ -43,8 +58,10 @@ function AddDogFormPage() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log('register form submitted', dogData)
-    navigate('/home')
+    const token = await getAccessTokenSilently()
+    mutations.mutate({ dogData, token })
+
+    navigate('/dogs')
   }
 
   function handleSelect(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -109,6 +126,24 @@ function AddDogFormPage() {
               name="breed"
               placeholder="e.g. pug"
               value={dogData.breed}
+              onChange={handleChange}
+              className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
+              required
+            />
+          </div>
+          <div className="flex flex-col ">
+            <label
+              htmlFor="gender"
+              className="pl-7 pb-2 text-lg text-yellow-950"
+            >
+              gender:
+            </label>
+            <input
+              id="gender"
+              type="text"
+              name="gender"
+              placeholder="e.g. female or Male"
+              value={dogData.gender}
               onChange={handleChange}
               className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
               required

@@ -54,7 +54,7 @@ function Nav(props: Props) {
         </li>
         <li>
           <button onClick={() => goTo('/messages')} disabled={!isAuthenticated}>
-            My message
+            My Message
           </button>
         </li>
         <li>

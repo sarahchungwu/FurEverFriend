@@ -4,6 +4,7 @@ export const dogsDraftSchema = z.object({
   img: z.string(),
   breed: z.string(),
   age: z.number(),
+  gender: z.string(),
   personality: z.string(),
   description: z.string(),
 })

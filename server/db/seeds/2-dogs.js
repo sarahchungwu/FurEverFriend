@@ -6,6 +6,7 @@ exports.seed = async function (knex) {
       name: 'Bubble',
       img: 'https://cdn.pixabay.com/photo/2016/07/07/15/35/puppy-1502565_640.jpg',
       breed: 'Pug',
+      gender: 'female',
       age: 3,
       personality: 'friendly',
       description:
@@ -15,8 +16,9 @@ exports.seed = async function (knex) {
       id: 2,
       user_id: 'google-oauth2|110655168501149628622',
       name: 'Buddy',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/800px-Labrador_on_Quantock_%282175262184%29.jpg',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStUPOdC988ZGsYfR9cLqrRw34-WuLlWZJd9A&usqp=CAU',
       breed: 'Labrador Retriever',
+      gender: 'male',
       age: 2,
       personality: 'playful',
       description:
@@ -28,6 +30,7 @@ exports.seed = async function (knex) {
       name: 'Charlie',
       img: 'https://ocdn.eu/images/pulscms/OWM7MDA_/fb1a540060e575ceba4012396662ccaf.jpg',
       breed: 'Golden Retriever',
+      gender: 'male',
       age: 2,
       personality: 'friendly',
       description:
@@ -39,6 +42,7 @@ exports.seed = async function (knex) {
       name: 'Max',
       img: 'https://www.akc.org/wp-content/uploads/2022/10/Ger…g-up-on-a-tree-trunk-exploring-a-park-500x486.jpg',
       breed: 'German Shepherd',
+      gender: 'male',
       age: 3,
       personality: 'intelligent',
       description:
@@ -50,6 +54,7 @@ exports.seed = async function (knex) {
       name: 'Luna',
       img: 'https://media1.popsugar-assets.com/files/thumbor/-…39c4.60280062_/i/cute-pictures-border-collies.jpg',
       breed: 'Border Collie',
+      gender: 'female',
       age: 3,
       personality: 'playful',
       description:
@@ -61,6 +66,7 @@ exports.seed = async function (knex) {
       name: 'Bailey',
       img: 'https://highlandcanine.com/wp-content/uploads/2021/04/pug-running-in-the-grass.jpg',
       breed: 'pug',
+      gender: 'male',
       age: 1,
       personality: 'playful',
       description:
@@ -72,6 +78,7 @@ exports.seed = async function (knex) {
       name: 'Cooper',
       img: 'https://media1.popsugar-assets.com/files/thumbor/-…39c4.60280062_/i/cute-pictures-border-collies.jpg',
       breed: 'pug',
+      gender: 'male',
       age: 2,
       personality: 'intelligent',
       description:

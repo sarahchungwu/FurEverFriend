@@ -19,7 +19,7 @@ import MatchListPage from './Pages/MatchPage/MatchListPage'
 import ProfilePage from './Pages/Profile/ProfilePage'
 import RegisterPage from './Pages/Profile/RegisterPage'
 import { Auth0Provider } from '@auth0/auth0-react'
-import MyDogPage from './components/Dogs/MyDogPage'
+import MyDogPage from './Pages/DogPage/MyDogPage'
 import EditProfilePage from './Pages/Profile/EditProfilePage'
 
 function AppProvider() {
@@ -39,7 +39,7 @@ function AppProvider() {
         <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
         <Route path="/messages" element={<MassageListPage />} />
         <Route path="/messages/:id" element={<MassageDetailPage />} />
-        <Route path="/messages/add" element={<MassageFormPage />} />
+        <Route path="/messages/:id/add" element={<MassageFormPage />} />
       </Route>,
     ),
   )
@@ -50,11 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const queryClient = new QueryClient()
   createRoot(document.getElementById('app') as HTMLElement).render(
     <Auth0Provider
-      domain="kahikatea-sarah.au.auth0.com"
-      clientId="SgnYeotxVOop1HydEg5o6M2djY7rHK5z"
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      domain={import.meta.env.VITE_AUTH0_DOMAIN as string}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID as string}
       cacheLocation="localstorage"
       authorizationParams={{
-        audience: 'https://fureverfriend/api',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE as string,
         redirect_uri: window.location.origin,
       }}
     >

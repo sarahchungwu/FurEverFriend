@@ -5,6 +5,7 @@ exports.up = async function (knex) {
     table.string('name')
     table.string('img')
     table.string('breed')
+    table.string('gender')
     table.integer('age')
     table.string('personality')
     table.string('description')

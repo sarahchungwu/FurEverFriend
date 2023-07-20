@@ -11,6 +11,7 @@ export async function getDogByUser(auth0Id: string) {
       'name',
       'img',
       'breed',
+      'gender',
       'age',
       'personality',
       'description',
@@ -25,10 +26,11 @@ export async function getDogById(dogId: number, auth0Id: string) {
       'name',
       'img',
       'breed',
+      'gender',
       'age',
       'personality',
       'description',
-    )) as DogsData[]
+    )) as DogsData
 }
 
 export async function addNewDog(dogProfile: AddDogData) {
@@ -37,6 +39,7 @@ export async function addNewDog(dogProfile: AddDogData) {
     name: dogProfile.name,
     img: dogProfile.img,
     breed: dogProfile.breed,
+    gender: dogProfile.gender,
     age: dogProfile.age,
     personality: dogProfile.personality,
     description: dogProfile.description,
@@ -61,15 +64,22 @@ export async function deleteDog(dogId: number, auth0Id: string) {
 }
 
 //get the matchlist for the dog
-export async function getMatchList(auth0Id: string, dogId: number) {
+export async function getMatchList(dogId: number) {
   return (await db('matches')
     .join('dogs', 'dogs.id', 'matched_dog_id')
-    .where('matches.user_id', auth0Id)
+    .join('users', 'users.auth0_id', 'matches.user_id')
     .where('dog_id', dogId)
     .select(
       'dogs.name as dog_name',
       'dogs.id as matched_dog_id',
       'dogs.img as dog_img',
+      'dogs.age as dog_age',
+      'dogs.breed as dog_breed',
+      'dogs.gender as dog_gender',
+      'dogs.personality as dog_personality',
+      'dogs.description as dog_description',
+      'users.username as matched_username',
+      'users.auth0_id as matched_user_id',
     )) as MatchList[]
 }
 
