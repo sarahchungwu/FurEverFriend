@@ -35,7 +35,6 @@ function MatchList(props: Props) {
   if (matchQuery.isLoading) return 'Loading...'
 
   const filteredMatchData = matchQuery.data?.find((arr) => arr.length > 0)
-  console.log('I am the filteredData', filteredMatchData)
 
   return (
     <>
@@ -74,7 +73,7 @@ function MatchList(props: Props) {
         justify-center text-center py-2 px-4 mb-6 mt-8 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
           >
-            <Link to={`/dogs/matches/${matchDog.matched_dog_id}`}>
+            <Link to={`/dogs/matches/${matchDog.matched_user_id}`}>
               <FontAwesomeIcon icon={faEnvelope} className=" text-3xl" />
             </Link>
           </button>
