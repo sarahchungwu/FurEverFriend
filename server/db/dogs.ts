@@ -73,6 +73,8 @@ export async function getMatchList(dogId: number) {
       'dogs.name as dog_name',
       'dogs.id as matched_dog_id',
       'dogs.img as dog_img',
+      'dogs.age as dog_age',
+      'dogs.breed as dog_breed',
       'dogs.gender as dog_gender',
       'dogs.personality as dog_personality',
       'dogs.description as dog_description',
