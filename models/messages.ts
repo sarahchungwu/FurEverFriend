@@ -5,20 +5,20 @@ export const updateMessageStatusSchema = z.object({
 })
 
 export const addMessageDraftSchema = z.object({
-  receiver_id: z.string(),
+  receiverId: z.string(),
   text: z.string(),
 })
 
 export const addMessageToBackendSchema = addMessageDraftSchema.extend({
-  sender_id: z.string(),
-  is_read: z.boolean(),
-  sent_at: z.date(),
+  senderId: z.string(),
+  isRead: z.boolean(),
+  sentAt: z.date(),
 })
 
 export const messageFromBackendSchema = addMessageToBackendSchema.extend({
-  sender_name: z.string(),
-  is_read: z.boolean(),
-  sent_at: z.date(),
+  senderName: z.string(),
+  isRead: z.boolean(),
+  sentAt: z.date(),
   id: z.number(),
 })
 

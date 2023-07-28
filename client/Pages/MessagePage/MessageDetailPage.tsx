@@ -30,7 +30,7 @@ function MessageDetailPage() {
 
           <div className="flex flex-col  items-center bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10">
             <h2 className=" text-2xl font-bold mb-4 text-center ">
-              {messageQuery.data.sender_name}
+              {messageQuery.data.senderName}
             </h2>
             <div className=" p-20 ">
               <p className="w-5/6 text-lg">{messageQuery.data.text}</p>

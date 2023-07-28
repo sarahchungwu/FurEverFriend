@@ -16,7 +16,7 @@ function FirstMessagePage() {
   const queryClient = useQueryClient()
 
   const [messageData, setMessageData] = useState<AddMessage>({
-    receiver_id: receiverId,
+    receiverId: receiverId,
     text: '',
   })
 

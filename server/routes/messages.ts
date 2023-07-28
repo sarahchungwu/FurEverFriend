@@ -70,9 +70,9 @@ router.post('/', validateAccessToken, async (req, res) => {
 
     const newMessage = {
       ...userResult.data,
-      sender_id: auth0Id,
-      is_read: false,
-      sent_at: new Date(),
+      senderId: auth0Id,
+      isRead: false,
+      sentAt: new Date(),
     }
 
     await db.addNewMessage(newMessage)

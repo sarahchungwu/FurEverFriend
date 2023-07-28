@@ -59,18 +59,18 @@ function MessageListPage() {
               <li key={message.id}>
                 <Link
                   to={`/messages/${message.id}`}
-                  onClick={() => handleClick(message.id, message.is_read)}
+                  onClick={() => handleClick(message.id, message.isRead)}
                 >
                   <div className=" bg-orange-200 bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:scale-105 mt-10">
                     <h2 className="flex flex-row justify-start text-2xl font-bold mb-4 text-center ">
-                      {message.sender_name}
+                      {message.senderName}
                     </h2>
 
                     <div className="flex flex-row justify-end">
                       <p className="text-gray-600 mr-4">
-                        {new Date(message.sent_at).toLocaleString()}
+                        {new Date(message.sentAt).toLocaleString()}
                       </p>
-                      {message.is_read ? (
+                      {message.isRead ? (
                         <FontAwesomeIcon
                           icon={faEnvelopeOpen}
                           className="text-2xl"
