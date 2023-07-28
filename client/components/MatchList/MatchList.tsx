@@ -13,7 +13,6 @@ interface Props {
 function MatchList(props: Props) {
   const dogListData = props.data
   const { user, getAccessTokenSilently } = useAuth0()
-  console.log('I am in the DogList Data', dogListData)
   const matchQuery = useQuery({
     queryKey: ['fetchMatchList', dogListData],
     queryFn: async () => {
@@ -31,7 +30,6 @@ function MatchList(props: Props) {
     enabled: !!user && dogListData.length > 0,
   })
 
-  console.log('I am the dogMatch dog', matchQuery.data)
   if (matchQuery.isLoading) return 'Loading...'
 
   const filteredMatchData = matchQuery.data?.find((arr) => arr.length > 0)

@@ -1,10 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { useQuery, useQueryClient } from 'react-query'
 import { DogsDataBackend } from '../../../models/dog'
 import { fetchDogsList } from '../../apis/dogs'
-import { fetchMatchList } from '../../apis/matches'
 import MatchList from '../../components/MatchList/MatchList'
 
 function MatchListPage() {
