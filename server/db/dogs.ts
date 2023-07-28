@@ -70,16 +70,16 @@ export async function getMatchList(dogId: number) {
     .join('users', 'users.auth0_id', 'matches.user_id')
     .where('dog_id', dogId)
     .select(
-      'dogs.name as dog_name',
-      'dogs.id as matched_dog_id',
-      'dogs.img as dog_img',
-      'dogs.age as dog_age',
-      'dogs.breed as dog_breed',
-      'dogs.gender as dog_gender',
-      'dogs.personality as dog_personality',
-      'dogs.description as dog_description',
-      'users.username as matched_username',
-      'users.auth0_id as matched_user_id',
+      'dogs.name as dogName',
+      'dogs.id as matchedDogId',
+      'dogs.img as dogImg',
+      'dogs.age as dogAge',
+      'dogs.breed as dogBreed',
+      'dogs.gender as dogGender',
+      'dogs.personality as dogPersonality',
+      'dogs.description as dogDescription',
+      'users.username as matchedUsername',
+      'users.auth0_id as matchedUserId',
     )) as MatchList[]
 }
 

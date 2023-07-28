@@ -1,16 +1,16 @@
 import * as z from 'zod'
 
 export const matchListSchema = z.object({
-  dog_name: z.string(),
-  matched_dog_id: z.number(),
-  dog_img: z.string(),
-  dog_age: z.number(),
-  dog_gender: z.number(),
-  dog_breed: z.string(),
-  matched_username: z.string(),
-  matched_user_id: z.string(),
-  dog_personality: z.string(),
-  dog_description: z.string(),
+  dogName: z.string(),
+  matchedDogId: z.number(),
+  dogImg: z.string(),
+  dogAge: z.number(),
+  dogGender: z.number(),
+  dogBreed: z.string(),
+  matchedUsername: z.string(),
+  matchedUserId: z.string(),
+  dogPersonality: z.string(),
+  dogDescription: z.string(),
 })
 
 export const addMatchSchema = z.object({
