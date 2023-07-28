@@ -7,7 +7,7 @@ export async function getDogByUser(auth0Id: string) {
     .where('user_id', auth0Id)
     .select(
       'id',
-      'user_id',
+      'user_id as userId',
       'name',
       'img',
       'breed',
@@ -16,6 +16,20 @@ export async function getDogByUser(auth0Id: string) {
       'personality',
       'description',
     )) as DogsDataBackend[]
+}
+
+export async function getAllDogs() {
+  return (await db('dogs').select(
+    'id',
+    'user_id as userId',
+    'name',
+    'img',
+    'breed',
+    'gender',
+    'age',
+    'personality',
+    'description',
+  )) as DogsDataBackend[]
 }
 
 export async function getDogById(dogId: number, auth0Id: string) {

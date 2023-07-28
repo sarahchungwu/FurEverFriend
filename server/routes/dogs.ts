@@ -24,6 +24,24 @@ router.get('/', validateAccessToken, async (req, res) => {
   }
 })
 
+// GET /api/v1/dogs/all
+router.get('/all', validateAccessToken, async (req, res) => {
+  const auth0Id = req.auth?.payload.sub
+
+  if (!auth0Id) {
+    res.status(400).json({ message: 'Please provide an id' })
+    return
+  }
+
+  try {
+    const dogs = await db.getAllDogs()
+    res.status(200).json({ dogs })
+  } catch (error) {
+    logError(error)
+    res.status(500).json({ message: 'Unable to ge the data from database' })
+  }
+})
+
 // GET /api/v1/dogs/:id
 router.get('/:id', validateAccessToken, async (req, res) => {
   const auth0Id = req.auth?.payload.sub
