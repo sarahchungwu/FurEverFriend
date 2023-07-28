@@ -12,6 +12,15 @@ export async function fetchDogsList(token: string): Promise<DogsDataBackend[]> {
   return res.body.dogs
 }
 
+export async function fetchAllDogs(token: string): Promise<DogsDataBackend[]> {
+  const res = await request
+    .get(rootUrl + 'dogs/all')
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+
+  return res.body.dogs
+}
+
 export async function addDog(newDog: DogsData, token: string): Promise<void> {
   await request
     .post(rootUrl + 'dogs')
