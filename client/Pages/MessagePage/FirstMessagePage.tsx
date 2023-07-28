@@ -1,14 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import { DogsDataBackend } from '../../../models/dog'
 import { AddMessage } from '../../../models/messages'
-import { fetchDogById } from '../../apis/dogs'
 import { addMessage } from '../../apis/messages'
 
 function FirstMessagePage() {
-  const { user, getAccessTokenSilently } = useAuth0()
+  const { getAccessTokenSilently } = useAuth0()
   const navigate = useNavigate()
 
   const { id } = useParams()
