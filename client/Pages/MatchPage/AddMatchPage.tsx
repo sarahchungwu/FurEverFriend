@@ -88,7 +88,6 @@ function AddMatchPage() {
     }) => addNewMatch(matchDogData, userDogId, token),
     onSuccess: async () => {
       queryClient.invalidateQueries('fetchMatchList')
-      console.log('I am in the mutation')
     },
   })
 
