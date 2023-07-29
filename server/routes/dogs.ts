@@ -190,9 +190,10 @@ router.post('/:id/matches', validateAccessToken, async (req, res) => {
       return
     }
 
+    const matchedDogData = db.getMatchedDogById(userResult.data.matchedDogId)
     const newMatch = {
       ...userResult.data,
-      userId: auth0Id,
+      userId: (await matchedDogData).userId,
     } as AddMatchToBackend
 
     await db.addNewMatch(newMatch)

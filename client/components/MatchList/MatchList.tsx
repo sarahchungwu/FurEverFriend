@@ -33,6 +33,7 @@ function MatchList(props: Props) {
   if (matchQuery.isLoading) return 'Loading...'
 
   const filteredMatchData = matchQuery.data?.find((arr) => arr.length > 0)
+  console.log(filteredMatchData, 'I am the fiteredMatchData')
 
   return (
     <>

@@ -100,7 +100,6 @@ function AddMatchPage() {
     }
     const token = await getAccessTokenSilently()
     mutations.mutate({ matchDogData, userDogId, token })
-    console.log('submit', matchDogData)
 
     navigate('/dogs/matches')
   }
