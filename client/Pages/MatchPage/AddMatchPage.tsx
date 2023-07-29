@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { fetchAllDogs, fetchDogById, fetchDogsList } from '../../apis/dogs'
+import { fetchAllDogs, fetchDogById } from '../../apis/dogs'
 import { DogsDataBackend } from '../../../models/dog'
 
 // Fetch all dogs
@@ -46,12 +46,18 @@ function AddMatchPage() {
   ) {
     const allDogs = dogsQuery.data
     const userDog = userDogQuery.data
-    console.log(userDog, 'I am the userdog')
 
     const canMatchedDogs = allDogs.filter(
       (dog) => dog.userId !== userDog.userId,
     )
-    console.log(canMatchedDogs, 'I am the canMatchdogs')
+    //the logic will change based on the largerDataBase
+    const matchedDogs = canMatchedDogs.filter(
+      (matchedDog) =>
+        (matchedDog.breed === userDog.breed &&
+          matchedDog.gender !== userDog.gender) ||
+        matchedDog.personality === userDog.personality ||
+        matchedDog.age === userDog.age,
+    )
   }
 
   return (
