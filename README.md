@@ -11,7 +11,9 @@ To get started with this project, follow these steps:
 1. Clone the repository to your local machine.
 
 2. Navigate into the project directory and install the dependencies.
-cd your_repo_name
+
+```cd your_repo_name```
+
 ```npm install```
 
 3. Setup the database by running the migrations and seeding data.
