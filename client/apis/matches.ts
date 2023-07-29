@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { MatchList } from '../../models/matches'
+import { AddMatch, MatchList } from '../../models/matches'
 
 const rootUrl = '/api/v1/'
 
@@ -13,4 +13,16 @@ export async function fetchMatchList(
     .set('Content-Type', 'application/json')
 
   return res.body
+}
+
+export async function addNewMatch(
+  matchData: AddMatch,
+  userDogId: number,
+  token: string,
+): Promise<void> {
+  await request
+    .post(rootUrl + `dogs/${userDogId}/matches`)
+    .set('Authorization', `Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+    .send(matchData)
 }

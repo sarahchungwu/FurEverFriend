@@ -1,14 +1,18 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAllDogs, fetchDogById } from '../../apis/dogs'
 import { DogsDataBackend } from '../../../models/dog'
 import { useEffect, useState } from 'react'
+import { AddMatch } from '../../../models/matches'
+import { addNewMatch } from '../../apis/matches'
 
 function AddMatchPage() {
   const userDogId = Number(useParams().id)
+  const navigate = useNavigate()
   const { user, getAccessTokenSilently } = useAuth0()
   const [matchedDogs, setMatchedDogs] = useState<DogsDataBackend[]>([])
+  const queryClient = useQueryClient()
 
   // Fetch all dogs
   const dogsQuery = useQuery({
@@ -70,16 +74,35 @@ function AddMatchPage() {
     userDogQuery.data,
     userDogQuery.isLoading,
   ])
+
+  //matchData is mutated
+  const mutations = useMutation({
+    mutationFn: ({
+      matchDogData,
+      userDogId,
+      token,
+    }: {
+      matchDogData: AddMatch
+      userDogId: number
+      token: string
+    }) => addNewMatch(matchDogData, userDogId, token),
+    onSuccess: async () => {
+      queryClient.invalidateQueries('fetchMatchList')
+      console.log('I am in the mutation')
+    },
+  })
+
   async function handleAccept(matchedDogId: number) {
     // const token = await getAccessTokenSilently()
     const matchDogData = {
       dogId: userDogId,
       matchedDogId: matchedDogId,
     }
-    // mutations.mutate({ dogData, token })
+    const token = await getAccessTokenSilently()
+    mutations.mutate({ matchDogData, userDogId, token })
     console.log('submit', matchDogData)
 
-    // navigate('/dogs')
+    navigate('/dogs/matches')
   }
 
   return (
