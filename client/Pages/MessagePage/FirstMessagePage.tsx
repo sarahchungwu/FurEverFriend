@@ -29,7 +29,6 @@ function FirstMessagePage() {
       token: string
     }) => addMessage(messageData, token),
     onSuccess: async () => {
-      console.log('added, I am in message the mutation')
       queryClient.invalidateQueries('fetchMessagesList')
     },
   })

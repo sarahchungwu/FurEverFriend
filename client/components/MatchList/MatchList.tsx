@@ -32,11 +32,19 @@ function MatchList(props: Props) {
 
   if (matchQuery.isLoading) return 'Loading...'
 
-  const filteredMatchData = matchQuery.data?.find((arr) => arr.length > 0)
+  //Create a new array with the sub-array elements concatenated
+  const mergedMatchData = matchQuery.data?.flat()
+  //combine .filter() and .findIndex to reduce repetitive object
+  const uniqueMatchData = mergedMatchData?.filter((item, index, array) => {
+    return (
+      index ===
+      array.findIndex((obj) => obj.matchedUserId === item.matchedUserId)
+    )
+  })
 
   return (
     <>
-      {filteredMatchData?.map((matchDog) => (
+      {uniqueMatchData?.map((matchDog) => (
         <div
           key={matchDog.matchedDogId}
           className="flex flex-col items-center profile-container mx-auto max-w-md p-8 text-center  mb-5 mt-8 w-10/12 bg-white rounded-lg bg-opacity-70"

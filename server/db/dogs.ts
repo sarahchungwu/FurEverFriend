@@ -48,6 +48,21 @@ export async function getDogById(dogId: number, auth0Id: string) {
     )) as AddDogData
 }
 
+export async function getMatchedDogById(dogId: number) {
+  return (await db('dogs')
+    .where('id', dogId)
+    .first(
+      'name',
+      'user_id as userId',
+      'img',
+      'breed',
+      'gender',
+      'age',
+      'personality',
+      'description',
+    )) as AddDogData
+}
+
 export async function addNewDog(dogProfile: AddDogData) {
   return await db('dogs').insert({
     user_id: dogProfile.userId,
