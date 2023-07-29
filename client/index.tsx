@@ -21,6 +21,7 @@ import RegisterPage from './Pages/Profile/RegisterPage'
 import { Auth0Provider } from '@auth0/auth0-react'
 import MyDogPage from './Pages/DogPage/MyDogPage'
 import EditProfilePage from './Pages/Profile/EditProfilePage'
+import FirstMessagePage from './Pages/MessagePage/FirstMessagePage'
 
 function AppProvider() {
   const routes = createBrowserRouter(
@@ -37,6 +38,7 @@ function AppProvider() {
         <Route path="/dogs/:id" element={<DogProfilePage />} />
         <Route path="/dogs/matches" element={<MatchListPage />} />
         <Route path="/dogs/:id/add-match" element={<AddMatchPage />} />
+        <Route path="dogs/matches/:id" element={<FirstMessagePage />} />
         <Route path="/messages" element={<MassageListPage />} />
         <Route path="/messages/:id" element={<MassageDetailPage />} />
         <Route path="/messages/:id/add" element={<MassageFormPage />} />

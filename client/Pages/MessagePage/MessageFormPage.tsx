@@ -11,7 +11,7 @@ function MessageFormPage() {
   const messageId = Number(useParams().id)
   const queryClient = useQueryClient()
   const [messageData, setMessageData] = useState<AddMessage>({
-    receiver_id: '',
+    receiverId: '',
     text: '',
   })
 
@@ -30,7 +30,7 @@ function MessageFormPage() {
       if (data) {
         setMessageData((prev) => ({
           ...prev,
-          receiver_id: data.sender_id,
+          receiverId: data.senderId,
         }))
       }
     },
@@ -79,7 +79,7 @@ function MessageFormPage() {
                 htmlFor="bio"
                 className=" pb-2 text-2xl text-yellow-950 font-bold mt-8"
               >
-                your reply to {messageQuery.data.sender_name}
+                your reply to {messageQuery.data.senderName}
               </label>
               <input
                 type="text"

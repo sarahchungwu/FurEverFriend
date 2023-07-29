@@ -7,12 +7,12 @@ export async function getAllMessages(auth0Id: string) {
     .where('receiver_id', auth0Id)
     .select(
       'id',
-      'sender_id',
-      'users.username as sender_name',
-      'receiver_id',
+      'sender_id as senderId',
+      'users.username as senderName',
+      'receiver_id as receiverId',
       'text',
-      'sent_at',
-      'is_read',
+      'sent_at as sentAt',
+      'is_read as isRead',
     )) as MessageFromBackend[]
 }
 
@@ -23,22 +23,22 @@ export async function getMessageById(messageId: number, auth0Id: string) {
     .where('receiver_id', auth0Id)
     .first(
       'id',
-      'users.username as sender_name',
-      'receiver_id',
-      'sender_id',
+      'users.username as senderName',
+      'receiver_id as receiverId',
+      'sender_id as senderId',
       'text',
-      'sent_at',
-      'is_read',
+      'sent_at as sentAt',
+      'is_read as isRead',
     )) as MessageFromBackend[]
 }
 
 export async function addNewMessage(newMessage: AddMessageToBackend) {
   return await db('messages').insert({
-    receiver_id: newMessage.receiver_id,
+    receiver_id: newMessage.receiverId,
     text: newMessage.text,
-    sender_id: newMessage.sender_id,
-    is_read: newMessage.is_read,
-    sent_at: newMessage.sent_at,
+    sender_id: newMessage.senderId,
+    is_read: newMessage.isRead,
+    sent_at: newMessage.senderId,
   })
 }
 

@@ -48,9 +48,6 @@ function HomePage() {
             {dogListQuery.data.length > 0 ? (
               <div className="flex flex-col items-center">
                 <DogList data={dogListQuery.data} />
-                <button className="flex gap-10 h-2/3 bg-orange-200 shadow-lg text-yellow-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-orange-300 focus:bg-orange-300 mt-28 transform transition-transform hover:scale-150">
-                  start a Match
-                </button>
               </div>
             ) : (
               <NoDog />

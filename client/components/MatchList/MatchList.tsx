@@ -2,6 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 import { DogsDataBackend } from '../../../models/dog'
 import { fetchMatchList } from '../../apis/matches'
 
@@ -12,7 +13,6 @@ interface Props {
 function MatchList(props: Props) {
   const dogListData = props.data
   const { user, getAccessTokenSilently } = useAuth0()
-  console.log('I am in the DogList Data', dogListData)
   const matchQuery = useQuery({
     queryKey: ['fetchMatchList', dogListData],
     queryFn: async () => {
@@ -30,40 +30,38 @@ function MatchList(props: Props) {
     enabled: !!user && dogListData.length > 0,
   })
 
-  console.log('I am the dogMatch dog', matchQuery.data)
   if (matchQuery.isLoading) return 'Loading...'
 
   const filteredMatchData = matchQuery.data?.find((arr) => arr.length > 0)
-  console.log('I am the filteredData', filteredMatchData)
 
   return (
     <>
       {filteredMatchData?.map((matchDog) => (
         <div
-          key={matchDog.matched_dog_id}
+          key={matchDog.matchedDogId}
           className="flex flex-col items-center profile-container mx-auto max-w-md p-8 text-center  mb-5 mt-8 w-10/12 bg-white rounded-lg bg-opacity-70"
         >
           <h1 className="pt-3 text-3xl  text-yellow-950">
-            Hey! meet {matchDog.dog_name} and {matchDog.matched_username}
+            Hey! meet {matchDog.dogName} and {matchDog.matchedUsername}
           </h1>
           <div className="w-40 h-40 rounded-full mx-auto overflow-hidden shadow-md mt-8 mb-8">
             <img
-              src={`${matchDog.dog_img}`}
-              alt={`${matchDog.dog_name}`}
+              src={`${matchDog.dogImg}`}
+              alt={`${matchDog.dogName}`}
               className="w-full h-full object-cover"
             />
           </div>
 
           <div className="flex flex-col items-center text-3xl font-bold mt-3 w-1/3 text-yellow-950 "></div>
           <div className=" text-gray-600 mt-2 mb-8">
-            <p>Age: {matchDog.dog_age}</p>
-            <p>Breed: {matchDog.dog_breed}</p>
-            <p>Gender: {matchDog.dog_gender}</p>
-            <p>Pesonality: {matchDog.dog_personality}</p>
+            <p>Age: {matchDog.dogAge}</p>
+            <p>Breed: {matchDog.dogBreed}</p>
+            <p>Gender: {matchDog.dogGender}</p>
+            <p>Pesonality: {matchDog.dogPersonality}</p>
           </div>
           <div className=" p-4 mt-3 rounded-l-md shadow-md w-9/12 bg-orange-200 bg-opacity-50">
             <div className="h-100 p-2 text-lg text-yellow-950 ">
-              <p>{matchDog.dog_description}</p>
+              <p>{matchDog.dogDescription}</p>
             </div>
           </div>
           <button
@@ -73,9 +71,9 @@ function MatchList(props: Props) {
         justify-center text-center py-2 px-4 mb-6 mt-8 rounded-lg  cursor-pointer hover:bg-orange-300
         focus:bg-orange-300 "
           >
-            {/* <Link to={`/messages/${messageQuery.data.id}/add`}> */}
-
-            <FontAwesomeIcon icon={faEnvelope} className=" text-3xl" />
+            <Link to={`/dogs/matches/${matchDog.matchedUserId}`}>
+              <FontAwesomeIcon icon={faEnvelope} className=" text-3xl" />
+            </Link>
           </button>
         </div>
       ))}
