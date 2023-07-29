@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { fetchAllDogs, fetchDogById, fetchDogsList } from '../../apis/dogs'
 import { DogsDataBackend } from '../../../models/dog'
 
+// Fetch all dogs
 function AddMatchPage() {
   const userDogId = Number(useParams().id)
   const { user, getAccessTokenSilently } = useAuth0()
@@ -21,10 +22,7 @@ function AddMatchPage() {
   })
   //query user Dog (This will use state management to handle)
 
-  console.log(dogsQuery.data, 'I am in the DogQuery')
-
-  // logic will be, the userId !== userDogUserId
-  // if, else if
+  //Fetch user's dog
   const userDogQuery = useQuery({
     queryKey: 'fetchDogById',
     queryFn: async () => {
@@ -38,7 +36,23 @@ function AddMatchPage() {
     enabled: !!user,
   })
 
-  console.log('I am the userDogQuery', userDogQuery.data)
+  // logic will be, the userId !== userDogUserId
+  // if, else if
+  if (
+    !dogsQuery.isLoading &&
+    dogsQuery.data &&
+    !userDogQuery.isLoading &&
+    userDogQuery.data
+  ) {
+    const allDogs = dogsQuery.data
+    const userDog = userDogQuery.data
+    console.log(userDog, 'I am the userdog')
+
+    const canMatchedDogs = allDogs.filter(
+      (dog) => dog.userId !== userDog.userId,
+    )
+    console.log(canMatchedDogs, 'I am the canMatchdogs')
+  }
 
   return (
     <>

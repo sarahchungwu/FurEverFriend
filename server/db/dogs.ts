@@ -38,13 +38,14 @@ export async function getDogById(dogId: number, auth0Id: string) {
     .where('user_id', auth0Id)
     .first(
       'name',
+      'user_id as userId',
       'img',
       'breed',
       'gender',
       'age',
       'personality',
       'description',
-    )) as DogsData
+    )) as AddDogData
 }
 
 export async function addNewDog(dogProfile: AddDogData) {
