@@ -119,11 +119,11 @@ describe('GET /api/v1/dogs/:id', () => {
   })
 })
 
-describe('POST /api/v1/dogs', () => {
+describe(' /api/v1/dogs', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
-  it('should return 201 when creating a new profile', async () => {
+  it('should return 201 when creating a new dog', async () => {
     const fakeDog: AddDogData = {
       name: 'apple',
       img: '123.jpg',
@@ -178,11 +178,11 @@ describe('POST /api/v1/dogs', () => {
   })
 })
 
-describe('PATCH /api/v1/users', () => {
+describe('PATCH /api/v1/dogs/:id', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
-  it('should return 201 when creating a new profile', async () => {
+  it('should return 201 when updating dog profile', async () => {
     const fakeDog: DogsData = {
       name: 'apple',
       img: '123.jpg',
@@ -231,6 +231,30 @@ describe('PATCH /api/v1/users', () => {
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
       message: 'Unable to update dog in database',
+    })
+  })
+})
+
+describe('DELETE /api/v1/dogs/:id', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+  it('should return 200 when creating a new profile', async () => {
+    vi.mocked(db.deleteDog).mockResolvedValue()
+    const response = await request(server)
+      .delete('/api/v1/dogs/:id')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(200)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    vi.mocked(db.deleteDog).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .delete('/api/v1/dogs/:id')
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({
+      message: 'Unable to delete the data',
     })
   })
 })
