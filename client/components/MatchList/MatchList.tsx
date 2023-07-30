@@ -30,13 +30,10 @@ function MatchList(props: Props) {
     enabled: !!user && dogListData.length > 0,
   })
 
-  console.log(matchQuery.data, 'I am the matchList')
-
   if (matchQuery.isLoading) return 'Loading...'
 
   //Create a new array with the sub-array elements concatenated
   const mergedMatchData = matchQuery.data?.flat()
-  console.log(mergedMatchData, 'I am the mergedMatchData')
 
   //combine .filter() and .findIndex to reduce repetitive object
   const uniqueMatchData = mergedMatchData?.filter((item, index, array) => {
@@ -45,7 +42,6 @@ function MatchList(props: Props) {
       array.findIndex((obj) => JSON.stringify(obj) === JSON.stringify(item))
     )
   })
-  console.log(uniqueMatchData, 'I am the unique')
 
   return (
     <>

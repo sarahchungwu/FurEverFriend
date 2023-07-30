@@ -72,7 +72,7 @@ describe('POST /api/v1/dogs/:id/matches', () => {
 
     const newMatch = {
       ...fakeMatch,
-      userId: (await fakeMatchedDogData).userId,
+      userId: '123',
     } as AddMatchToBackend
 
     vi.mocked(db.addNewMatch).mockResolvedValue([1])
@@ -86,26 +86,58 @@ describe('POST /api/v1/dogs/:id/matches', () => {
   it('should return 400 if the body does not match the zod schemea', async () => {
     const fakeNewMatch = {}
 
+    const fakeMatchedDogData: AddDogData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+      userId: '123',
+    }
+    vi.mocked(db.getMatchedDogById).mockResolvedValue(fakeMatchedDogData)
+
+    const newMatch = {
+      ...fakeNewMatch,
+      userId: '123',
+    } as AddMatchToBackend
     vi.mocked(db.addNewMatch).mockResolvedValue([1])
     const response = await request(server)
       .post('/api/v1/dogs/:id/matches')
       .set('authorization', `Bearer ${getMockToken()}`)
-      .send(fakeNewMatch)
+      .send(newMatch)
     expect(response.status).toBe(400)
   })
 
   it('should return 500 when no access token is passed', async () => {
-    const fakeNewMatch: AddMatchToBackend = {
+    const fakeMatch: AddMatch = {
       matchedDogId: 3,
       dogId: 1,
-      userId: '123A',
     }
+
+    const fakeMatchedDogData: AddDogData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+      userId: '123',
+    }
+    vi.mocked(db.getMatchedDogById).mockResolvedValue(fakeMatchedDogData)
+
+    const newMatch = {
+      ...fakeMatch,
+      userId: '123',
+    } as AddMatchToBackend
 
     vi.mocked(db.addNewMatch).mockRejectedValue(new Error('test'))
     const response = await request(server)
       .post('/api/v1/dogs/:id/matches')
       .set('authorization', `Bearer ${getMockToken()}`)
-      .send(fakeNewMatch)
+      .send(newMatch)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
       message: 'Unable to insert new match dog to database',
