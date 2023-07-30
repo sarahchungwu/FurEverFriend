@@ -57,7 +57,7 @@ router.get('/:id', validateAccessToken, async (req, res) => {
     res.status(200).json(user)
   } catch (error) {
     logError(error)
-    res.status(500).json({ message: 'Unable to insert new user to database' })
+    res.status(500).json({ message: 'Unable to get the data from database' })
   }
 })
 
