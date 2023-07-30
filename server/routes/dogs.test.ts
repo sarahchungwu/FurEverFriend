@@ -8,6 +8,7 @@ import { AddDogData, DogsData, DogsDataBackend } from '../../models/dog'
 vi.mock('../db/dogs.ts')
 vi.mock('../logger.ts')
 
+//Dogs' Test
 describe('GET /api/v1/dogs', () => {
   afterEach(() => {
     vi.restoreAllMocks()
