@@ -118,3 +118,62 @@ describe('GET /api/v1/dogs/:id', () => {
     })
   })
 })
+
+describe('POST /api/v1/dogs', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+  it('should return 201 when creating a new profile', async () => {
+    const fakeDog: AddDogData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+      userId: '123',
+    }
+
+    vi.mocked(db.addNewDog).mockResolvedValue([1])
+    const response = await request(server)
+      .post('/api/v1/dogs')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(201)
+  })
+
+  it('should return 400 if the body does not match the zod schemea', async () => {
+    const fakeProfile = {}
+
+    vi.mocked(db.addNewDog).mockResolvedValue([1])
+    const response = await request(server)
+      .post('/api/v1/dogs')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeProfile)
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    const fakeDog: AddDogData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+      userId: '123',
+    }
+
+    vi.mocked(db.addNewDog).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .post('/api/v1/dogs')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({
+      message: 'Unable to insert new dog to database',
+    })
+  })
+})
