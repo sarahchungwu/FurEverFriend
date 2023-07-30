@@ -3,7 +3,7 @@ import request from 'supertest'
 import server from '../server'
 import * as db from '../db/dogs'
 import { getMockToken } from './mockToken'
-import { AddDogData, DogsDataBackend } from '../../models/dog'
+import { AddDogData, DogsData, DogsDataBackend } from '../../models/dog'
 
 vi.mock('../db/dogs.ts')
 vi.mock('../logger.ts')
@@ -174,6 +174,63 @@ describe('POST /api/v1/dogs', () => {
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
       message: 'Unable to insert new dog to database',
+    })
+  })
+})
+
+describe('PATCH /api/v1/users', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+  it('should return 201 when creating a new profile', async () => {
+    const fakeDog: DogsData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+    }
+
+    vi.mocked(db.updateDogProfile).mockResolvedValue()
+    const response = await request(server)
+      .patch('/api/v1/dogs/:id')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(201)
+  })
+
+  it('should return 400 if the body does not match the zod schemea', async () => {
+    const fakeDog = {}
+
+    vi.mocked(db.updateDogProfile).mockResolvedValue()
+    const response = await request(server)
+      .patch('/api/v1/dogs/:id')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    const fakeDog: DogsData = {
+      name: 'apple',
+      img: '123.jpg',
+      breed: 'fruits',
+      age: 1,
+      gender: 'female',
+      personality: 'happy as',
+      description: 'red apple',
+    }
+
+    vi.mocked(db.updateDogProfile).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .patch('/api/v1/dogs/:id')
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({
+      message: 'Unable to update dog in database',
     })
   })
 })
