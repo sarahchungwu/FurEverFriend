@@ -12,10 +12,10 @@ describe('GET /api/v1/users', () => {
   it('should return 200 with a user', async () => {
     const fakeUser: UsersDataBackend = {
       auth0Id: '123',
-      username: 'banana',
+      username: 'apple',
       email: 'banana123@example.com',
       pronouns: 'she/her',
-      bio: 'She is a banana',
+      bio: 'She is a apple',
     }
 
     vi.mocked(db.getUserById).mockResolvedValue(fakeUser)
@@ -33,7 +33,7 @@ describe('GET /api/v1/users', () => {
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
-      message: 'Unable to insert new user to database',
+      message: 'Unable to get user from the database',
     })
   })
 })
