@@ -120,7 +120,7 @@ describe('GET /api/v1/dogs/:id', () => {
   })
 })
 
-describe(' /api/v1/dogs', () => {
+describe('POST /api/v1/dogs', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
