@@ -9,7 +9,7 @@ vi.mock('../db/messages.ts')
 vi.mock('../logger.ts')
 
 //GET ALL MESSAGES
-describe('GET /api/v1/dogs', () => {
+describe('GET /api/v1/messages', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
@@ -44,3 +44,5 @@ describe('GET /api/v1/dogs', () => {
     })
   })
 })
+
+//GET messages by id  api/v1/messages/:id
