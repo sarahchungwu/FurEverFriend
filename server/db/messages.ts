@@ -29,7 +29,7 @@ export async function getMessageById(messageId: number, auth0Id: string) {
       'text',
       'sent_at as sentAt',
       'is_read as isRead',
-    )) as MessageFromBackend[]
+    )) as MessageFromBackend
 }
 
 export async function addNewMessage(newMessage: AddMessageToBackend) {
