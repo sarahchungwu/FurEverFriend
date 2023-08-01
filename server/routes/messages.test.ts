@@ -141,7 +141,7 @@ describe('PATCH /api/v1/messages/:id', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
-  it('should return 201 when updating the massage status', async () => {
+  it('should return 201 after updating the massage status', async () => {
     const messageId = '22'
     const isRead = true
 
