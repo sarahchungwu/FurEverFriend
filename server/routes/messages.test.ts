@@ -2,11 +2,7 @@ import * as db from '../db/messages'
 import request from 'supertest'
 import server from '../server'
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import {
-  AddMessage,
-  AddMessageToBackend,
-  MessageFromBackend,
-} from '../../models/messages'
+import { AddMessageToBackend, MessageFromBackend } from '../../models/messages'
 import { getMockToken } from './mockToken'
 
 vi.mock('../db/messages.ts')
@@ -67,15 +63,16 @@ describe('GET /api/v1/messages/:id', () => {
 
     vi.mocked(db.getMessageById).mockResolvedValue(fakeMessage)
     const response = await request(server)
-      .get('/api/v1/messages/:id')
+      .get(`/api/v1/messages/${fakeMessage.id}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(200)
     expect(response.body).toEqual(fakeMessage)
   })
   it('should return 500 when no access token is passed', async () => {
+    const fakeMassageId = 22
     vi.mocked(db.getMessageById).mockRejectedValue(new Error('test'))
     const response = await request(server)
-      .get('/api/v1/messages/:id')
+      .get(`/api/v1/messages/${fakeMassageId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
@@ -135,6 +132,50 @@ describe('POST /api/v1/messages', () => {
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
       message: 'Unable to insert new message to database',
+    })
+  })
+})
+
+//update Massage as is_read to be true
+describe('PATCH /api/v1/messages/:id', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+  it('should return 201 when updating the massage status', async () => {
+    const messageId = '22'
+    const isRead = true
+
+    vi.mocked(db.updateNewMessage).mockResolvedValue(1)
+    const response = await request(server)
+      .patch(`/api/v1/messages/${messageId}`)
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send({ isRead })
+    expect(response.status).toBe(201)
+  })
+
+  it('should return 400 if the body does not match the zod schemea', async () => {
+    const fakeDog = {}
+    const messageId = '22'
+    vi.mocked(db.updateNewMessage).mockResolvedValue(1)
+    const response = await request(server)
+      .patch(`/api/v1/messages/${messageId}`)
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send(fakeDog)
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    const messageId = '22'
+    const isRead = true
+
+    vi.mocked(db.updateNewMessage).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .patch(`/api/v1/messages/${messageId}`)
+      .set('authorization', `Bearer ${getMockToken()}`)
+      .send({ isRead })
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({
+      message: 'Unable to update message in database',
     })
   })
 })

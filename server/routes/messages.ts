@@ -117,15 +117,15 @@ router.patch('/:id', validateAccessToken, async (req, res) => {
     return
   }
 
-  if (!form) {
-    res.status(400).json({ message: 'Please provide a form' })
+  if (!form || typeof form.isRead !== 'boolean') {
+    res
+      .status(400)
+      .json({ message: 'Please provide a form with an isRead property' })
     return
   }
 
-  const { isRead } = form // Extract the isRead value from the form object
-
   try {
-    await db.updateNewMessage(messageId, auth0Id, isRead)
+    await db.updateNewMessage(messageId, auth0Id, form.isRead)
     res.sendStatus(201)
   } catch (e) {
     console.error(e)
