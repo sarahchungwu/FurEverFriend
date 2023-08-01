@@ -12,13 +12,12 @@ export const addMessageDraftSchema = z.object({
 export const addMessageToBackendSchema = addMessageDraftSchema.extend({
   senderId: z.string(),
   isRead: z.boolean(),
-  sentAt: z.date(),
+  sentAt: z.string(),
 })
 
 export const messageFromBackendSchema = addMessageToBackendSchema.extend({
   senderName: z.string(),
   isRead: z.boolean(),
-  sentAt: z.date(),
   id: z.number(),
 })
 

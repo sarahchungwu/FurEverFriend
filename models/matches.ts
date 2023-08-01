@@ -5,7 +5,7 @@ export const matchListSchema = z.object({
   matchedDogId: z.number(),
   dogImg: z.string(),
   dogAge: z.number(),
-  dogGender: z.number(),
+  dogGender: z.string(),
   dogBreed: z.string(),
   matchedUsername: z.string(),
   matchedUserId: z.string(),

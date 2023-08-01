@@ -20,7 +20,7 @@ router.get('/', validateAccessToken, async (req, res) => {
     res.status(200).json(user)
   } catch (error) {
     logError(error)
-    res.status(500).json({ message: 'Unable to ge the data from database' })
+    res.status(500).json({ message: 'Unable to get the data from database' })
   }
 })
 
@@ -72,7 +72,7 @@ router.post('/', validateAccessToken, async (req, res) => {
       ...userResult.data,
       senderId: auth0Id,
       isRead: false,
-      sentAt: new Date(),
+      sentAt: new Date().toISOString(),
     }
 
     await db.addNewMessage(newMessage)
@@ -97,7 +97,7 @@ router.delete('/:id', validateAccessToken, async (req, res) => {
   }
 
   try {
-    await db.deleteDog(messageId, auth0Id)
+    await db.deleteMessage(messageId, auth0Id)
     res.sendStatus(200)
     return
   } catch (error) {
@@ -117,15 +117,15 @@ router.patch('/:id', validateAccessToken, async (req, res) => {
     return
   }
 
-  if (!form) {
-    res.status(400).json({ message: 'Please provide a form' })
+  if (!form || typeof form.isRead !== 'boolean') {
+    res
+      .status(400)
+      .json({ message: 'Please provide a form with an isRead property' })
     return
   }
 
-  const { isRead } = form // Extract the isRead value from the form object
-
   try {
-    await db.updateNewMessage(messageId, auth0Id, isRead)
+    await db.updateNewMessage(messageId, auth0Id, form.isRead)
     res.sendStatus(201)
   } catch (e) {
     console.error(e)

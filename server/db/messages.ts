@@ -29,7 +29,7 @@ export async function getMessageById(messageId: number, auth0Id: string) {
       'text',
       'sent_at as sentAt',
       'is_read as isRead',
-    )) as MessageFromBackend[]
+    )) as MessageFromBackend
 }
 
 export async function addNewMessage(newMessage: AddMessageToBackend) {
@@ -54,7 +54,7 @@ export async function updateNewMessage(
 }
 
 //delete the message
-export async function deleteDog(messageId: number, auth0Id: string) {
+export async function deleteMessage(messageId: number, auth0Id: string) {
   await db('messages')
     .where('id', messageId)
     .where('receiver_id', auth0Id)

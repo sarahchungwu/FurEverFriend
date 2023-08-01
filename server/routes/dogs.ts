@@ -161,7 +161,7 @@ router.get('/:id/matches', validateAccessToken, async (req, res) => {
     res.status(200).json(user)
   } catch (error) {
     logError(error)
-    res.status(500).json({ message: 'Unable to ge the data from databasee' })
+    res.status(500).json({ message: 'Unable to get the data from database' })
   }
 })
 
@@ -200,7 +200,9 @@ router.post('/:id/matches', validateAccessToken, async (req, res) => {
     res.sendStatus(201)
   } catch (e) {
     console.error(e)
-    res.status(500).json({ message: 'Unable to insert new dog to database' })
+    res
+      .status(500)
+      .json({ message: 'Unable to insert new match dog to database' })
   }
 })
 export default router

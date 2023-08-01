@@ -34,11 +34,12 @@ function MatchList(props: Props) {
 
   //Create a new array with the sub-array elements concatenated
   const mergedMatchData = matchQuery.data?.flat()
+
   //combine .filter() and .findIndex to reduce repetitive object
   const uniqueMatchData = mergedMatchData?.filter((item, index, array) => {
     return (
       index ===
-      array.findIndex((obj) => obj.matchedUserId === item.matchedUserId)
+      array.findIndex((obj) => JSON.stringify(obj) === JSON.stringify(item))
     )
   })
 

@@ -8,6 +8,7 @@ import { AddDogData, DogsData, DogsDataBackend } from '../../models/dog'
 vi.mock('../db/dogs.ts')
 vi.mock('../logger.ts')
 
+//Dogs' Test
 describe('GET /api/v1/dogs', () => {
   afterEach(() => {
     vi.restoreAllMocks()
@@ -89,6 +90,7 @@ describe('GET /api/v1/dogs/:id', () => {
     vi.restoreAllMocks()
   })
   it('should return 200 with all the dogs', async () => {
+    const dogId = '123'
     const fakeDog: AddDogData = {
       userId: 'auth123',
       name: 'apple',
@@ -102,15 +104,16 @@ describe('GET /api/v1/dogs/:id', () => {
 
     vi.mocked(db.getDogById).mockResolvedValue(fakeDog)
     const response = await request(server)
-      .get('/api/v1/dogs/:id')
+      .get(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(200)
     expect(response.body).toEqual(fakeDog)
   })
   it('should return 500 when no access token is passed', async () => {
+    const dogId = '123'
     vi.mocked(db.getDogById).mockRejectedValue(new Error('test'))
     const response = await request(server)
-      .get('/api/v1/dogs/:id')
+      .get(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
@@ -119,7 +122,7 @@ describe('GET /api/v1/dogs/:id', () => {
   })
 })
 
-describe(' /api/v1/dogs', () => {
+describe('POST /api/v1/dogs', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
@@ -183,6 +186,7 @@ describe('PATCH /api/v1/dogs/:id', () => {
     vi.restoreAllMocks()
   })
   it('should return 201 when updating dog profile', async () => {
+    const dogId = '123'
     const fakeDog: DogsData = {
       name: 'apple',
       img: '123.jpg',
@@ -195,7 +199,7 @@ describe('PATCH /api/v1/dogs/:id', () => {
 
     vi.mocked(db.updateDogProfile).mockResolvedValue()
     const response = await request(server)
-      .patch('/api/v1/dogs/:id')
+      .patch(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(fakeDog)
     expect(response.status).toBe(201)
@@ -203,10 +207,11 @@ describe('PATCH /api/v1/dogs/:id', () => {
 
   it('should return 400 if the body does not match the zod schemea', async () => {
     const fakeDog = {}
+    const dogId = '123'
 
     vi.mocked(db.updateDogProfile).mockResolvedValue()
     const response = await request(server)
-      .patch('/api/v1/dogs/:id')
+      .patch(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(fakeDog)
     expect(response.status).toBe(400)
@@ -224,8 +229,9 @@ describe('PATCH /api/v1/dogs/:id', () => {
     }
 
     vi.mocked(db.updateDogProfile).mockRejectedValue(new Error('test'))
+    const dogId = '123'
     const response = await request(server)
-      .patch('/api/v1/dogs/:id')
+      .patch(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(fakeDog)
     expect(response.status).toBe(500)
@@ -240,17 +246,19 @@ describe('DELETE /api/v1/dogs/:id', () => {
     vi.restoreAllMocks()
   })
   it('should return 200 when creating a new profile', async () => {
+    const dogId = '123'
     vi.mocked(db.deleteDog).mockResolvedValue()
     const response = await request(server)
-      .delete('/api/v1/dogs/:id')
+      .delete(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(200)
   })
 
   it('should return 500 when no access token is passed', async () => {
+    const dogId = '123'
     vi.mocked(db.deleteDog).mockRejectedValue(new Error('test'))
     const response = await request(server)
-      .delete('/api/v1/dogs/:id')
+      .delete(`/api/v1/dogs/${dogId}`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
