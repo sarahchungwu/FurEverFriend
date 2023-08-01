@@ -97,7 +97,7 @@ router.delete('/:id', validateAccessToken, async (req, res) => {
   }
 
   try {
-    await db.deleteDog(messageId, auth0Id)
+    await db.deleteMessage(messageId, auth0Id)
     res.sendStatus(200)
     return
   } catch (error) {

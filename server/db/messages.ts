@@ -54,7 +54,7 @@ export async function updateNewMessage(
 }
 
 //delete the message
-export async function deleteDog(messageId: number, auth0Id: string) {
+export async function deleteMessage(messageId: number, auth0Id: string) {
   await db('messages')
     .where('id', messageId)
     .where('receiver_id', auth0Id)

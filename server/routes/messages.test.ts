@@ -179,3 +179,29 @@ describe('PATCH /api/v1/messages/:id', () => {
     })
   })
 })
+
+describe('DELETE /api/v1/messages/:id', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+  it('should return 200 when creating a new profile', async () => {
+    const messageId = '123'
+    vi.mocked(db.deleteMessage).mockResolvedValue()
+    const response = await request(server)
+      .delete(`/api/v1/messages/${messageId}`)
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(200)
+  })
+
+  it('should return 500 when no access token is passed', async () => {
+    const messageId = '123'
+    vi.mocked(db.deleteMessage).mockRejectedValue(new Error('test'))
+    const response = await request(server)
+      .delete(`/api/v1/messages/${messageId}`)
+      .set('authorization', `Bearer ${getMockToken()}`)
+    expect(response.status).toBe(500)
+    expect(response.body).toEqual({
+      message: 'Unable to delete the data',
+    })
+  })
+})
