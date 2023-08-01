@@ -14,6 +14,7 @@ describe('GET /api/v1/dogs/:id/matches', () => {
     vi.restoreAllMocks()
   })
   it('should return 200 with matchlist for the dog', async () => {
+    const dogId = '111'
     const fakeMatchList: MatchList[] = [
       {
         dogName: 'Apple',
@@ -31,15 +32,16 @@ describe('GET /api/v1/dogs/:id/matches', () => {
 
     vi.mocked(db.getMatchList).mockResolvedValue(fakeMatchList)
     const response = await request(server)
-      .get('/api/v1/dogs/:id/matches')
+      .get(`/api/v1/dogs/${dogId}/matches`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(200)
     expect(response.body).toEqual(fakeMatchList)
   })
   it('should return 500 when no access token is passed', async () => {
+    const dogId = '111'
     vi.mocked(db.getMatchList).mockRejectedValue(new Error('test'))
     const response = await request(server)
-      .get('/api/v1/dogs/:id/matches')
+      .get(`/api/v1/dogs/${dogId}/matches`)
       .set('authorization', `Bearer ${getMockToken()}`)
     expect(response.status).toBe(500)
     expect(response.body).toEqual({
@@ -58,6 +60,7 @@ describe('POST /api/v1/dogs/:id/matches', () => {
       dogId: 1,
     }
 
+    const dogId = '111'
     const fakeMatchedDogData: AddDogData = {
       name: 'apple',
       img: '123.jpg',
@@ -77,7 +80,7 @@ describe('POST /api/v1/dogs/:id/matches', () => {
 
     vi.mocked(db.addNewMatch).mockResolvedValue([1])
     const response = await request(server)
-      .post('/api/v1/dogs/:id/matches')
+      .post(`/api/v1/dogs/${dogId}/matches`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(newMatch)
     expect(response.status).toBe(201)
@@ -85,7 +88,7 @@ describe('POST /api/v1/dogs/:id/matches', () => {
 
   it('should return 400 if the body does not match the zod schemea', async () => {
     const fakeNewMatch = {}
-
+    const dogId = '111'
     const fakeMatchedDogData: AddDogData = {
       name: 'apple',
       img: '123.jpg',
@@ -104,13 +107,14 @@ describe('POST /api/v1/dogs/:id/matches', () => {
     } as AddMatchToBackend
     vi.mocked(db.addNewMatch).mockResolvedValue([1])
     const response = await request(server)
-      .post('/api/v1/dogs/:id/matches')
+      .post(`/api/v1/dogs/${dogId}/matches`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(newMatch)
     expect(response.status).toBe(400)
   })
 
   it('should return 500 when no access token is passed', async () => {
+    const dogId = '111'
     const fakeMatch: AddMatch = {
       matchedDogId: 3,
       dogId: 1,
@@ -135,7 +139,7 @@ describe('POST /api/v1/dogs/:id/matches', () => {
 
     vi.mocked(db.addNewMatch).mockRejectedValue(new Error('test'))
     const response = await request(server)
-      .post('/api/v1/dogs/:id/matches')
+      .post(`/api/v1/dogs/${dogId}/matches`)
       .set('authorization', `Bearer ${getMockToken()}`)
       .send(newMatch)
     expect(response.status).toBe(500)
