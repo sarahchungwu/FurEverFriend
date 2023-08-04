@@ -38,7 +38,7 @@ export async function addNewMessage(newMessage: AddMessageToBackend) {
     text: newMessage.text,
     sender_id: newMessage.senderId,
     is_read: newMessage.isRead,
-    sent_at: newMessage.senderId,
+    sent_at: newMessage.sentAt,
   })
 }
 
