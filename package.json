@@ -37,7 +37,8 @@
     "knex": "^2.3.0",
     "sqlite3": "^5.1.2",
     "superagent": "^8.0.9",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@devacademy/eslint-config": "^1.8.0",

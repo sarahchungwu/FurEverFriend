@@ -4,11 +4,10 @@ import { useQuery, useQueryClient } from 'react-query'
 import { DogsDataBackend } from '../../../models/dog'
 import { fetchDogsList } from '../../apis/dogs'
 import MatchList from '../../components/MatchList/MatchList'
-import DogProfilePage from '../DogPage/DogProfilePage'
 
 function MatchListPage() {
   const { user, getAccessTokenSilently } = useAuth0()
-  const queryClient = useQueryClient()
+
   const dogListQuery = useQuery({
     queryKey: 'fetchDogsList',
     queryFn: async () => {
