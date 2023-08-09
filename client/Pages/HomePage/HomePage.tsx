@@ -5,11 +5,10 @@ import { fetchDogsList } from '../../apis/dogs'
 import { fetchProfiles } from '../../apis/profile'
 import DogList from '../../components/Dogs/DogList'
 import NoDog from '../../components/Dogs/NoDog'
-import { dogListStore } from '../../store/dog'
 
 function HomePage() {
   const { user, getAccessTokenSilently } = useAuth0()
-  const { setDogList } = dogListStore()
+
   const dogListQuery = useQuery({
     queryKey: 'fetchDogsList',
     queryFn: async () => {
@@ -18,9 +17,6 @@ function HomePage() {
         return await fetchDogsList(accessToken)
       }
       return [] // Return an empty array as a fallback
-    },
-    onSuccess: (data: DogsDataBackend[]) => {
-      setDogList(data)
     },
     enabled: !!user,
   })

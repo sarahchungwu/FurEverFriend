@@ -4,12 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { deleteDog, fetchDogsList } from '../../apis/dogs'
-import { dogListStore } from '../../store/dog'
-import { DogsDataBackend } from '../../../models/dog'
 
 function MyDogPage() {
   const { user, getAccessTokenSilently } = useAuth0()
-  const { setDogList } = dogListStore()
+
   const { data, isLoading } = useQuery({
     queryKey: 'fetchDogsList',
     queryFn: async () => {
@@ -17,10 +15,6 @@ function MyDogPage() {
       if (user && user.sub) {
         return await fetchDogsList(accessToken)
       }
-      return [] // Return an empty array as a fallback
-    },
-    onSuccess: (data: DogsDataBackend[]) => {
-      setDogList(data)
     },
     enabled: !!user,
   })

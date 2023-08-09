@@ -4,11 +4,9 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { DogsData, DogsDataBackend } from '../../../models/dog'
 import { fetchDogById, updateDog } from '../../apis/dogs'
-import { dogListStore } from '../../store/dog'
 
 function DogProfilePage() {
   const navigate = useNavigate()
-  const { setDogList } = dogListStore()
   const { user, getAccessTokenSilently } = useAuth0()
   const queryClient = useQueryClient()
   const dogId = Number(useParams().id)
@@ -33,12 +31,6 @@ function DogProfilePage() {
       }
     },
     enabled: !!user,
-    onSuccess: (data) => {
-      if (data) {
-        setDogData(data)
-      }
-      // Save the data to state when the query succeeds.
-    },
   })
 
   const mutations = useMutation({
@@ -54,14 +46,6 @@ function DogProfilePage() {
 
     onSuccess: async () => {
       queryClient.invalidateQueries('fetchDogsList')
-
-      const newDogsList = (await queryClient.refetchQueries(
-        'fetchDogsList',
-      )) as { data: DogsDataBackend[] } | undefined
-
-      if (newDogsList?.data) {
-        setDogList(newDogsList.data)
-      }
     },
   })
 
