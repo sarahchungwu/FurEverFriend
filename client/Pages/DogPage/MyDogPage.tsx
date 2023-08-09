@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { deleteDog, fetchDogsList } from '../../apis/dogs'
+import { dogListStore } from '../../store/dog'
+import { DogsDataBackend } from '../../../models/dog'
 
 function MyDogPage() {
+  const { setDogList } = dogListStore()
   const { user, getAccessTokenSilently } = useAuth0()
   const queryClient = useQueryClient()
   const dogQuery = useQuery({
@@ -13,10 +16,12 @@ function MyDogPage() {
     queryFn: async () => {
       const accessToken = await getAccessTokenSilently()
       if (user && user.sub) {
-        const response = await fetchDogsList(accessToken)
-
-        return response
+        return await fetchDogsList(accessToken)
       }
+      return [] // Return an empty array as a fallback
+    },
+    onSuccess: (data: DogsDataBackend[]) => {
+      setDogList(data)
     },
     enabled: !!user,
   })
@@ -69,9 +74,9 @@ function MyDogPage() {
               />
             </div>
 
-            <div className=" text-3xl font-bold mt-3 w-1/3 text-yellow-950">
+            <div className=" text-3xl font-bold mt-3 w-6/12 text-yellow-950">
               <h1 className="pt-3">{dog.name}</h1>
-              <p className="text-lg">I am a {dog.personality} Dog</p>
+              <p className="text-lg mt-2">I am a {dog.personality} Dog</p>
             </div>
             <div className=" text-gray-600 mt-2 mb-8">
               <p>Age:{dog.age}</p>
