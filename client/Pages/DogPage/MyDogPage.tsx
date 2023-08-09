@@ -78,8 +78,8 @@ function MyDogPage() {
               <p>Breed:{dog.breed}</p>
               <p>Gender:{dog.gender}</p>
             </div>
-            <div className=" p-4 mt-3 rounded-l-md shadow-md w-9/12 bg-orange-200 bg-opacity-50">
-              <div className="h-56 p-2 text-lg text-yellow-950 ">
+            <div className=" p-4 mt-3 rounded-l-md shadow-md w-11/12 bg-orange-200 bg-opacity-50">
+              <div className="h-56 text-lg text-yellow-950 ">
                 <p>{dog.description}</p>
               </div>
             </div>
