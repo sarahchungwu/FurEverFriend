@@ -31,6 +31,7 @@ function MyDogPage() {
     await deleteDog(token, dogId)
     queryClient.invalidateQueries('fetchDogsList')
   }
+  // console.log('I am in the global state', dogs)
 
   return (
     <>

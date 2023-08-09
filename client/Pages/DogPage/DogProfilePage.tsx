@@ -20,7 +20,7 @@ function DogProfilePage() {
     description: '',
   } as DogsData)
 
-  const individualQuery = useQuery({
+  useQuery({
     queryKey: 'fetchDogById',
     queryFn: async () => {
       const accessToken = await getAccessTokenSilently()
@@ -38,7 +38,6 @@ function DogProfilePage() {
       // Save the data to state when the query succeeds.
     },
   })
-  console.log('I am the individualQuery', individualQuery)
 
   const mutations = useMutation({
     mutationFn: ({
@@ -72,7 +71,6 @@ function DogProfilePage() {
       id: 4,
       personality: 'intelligent',
     },
-    // Add more dogs with their respective IDs and personality traits
   ]
 
   // data is called and then mutated
@@ -90,7 +88,7 @@ function DogProfilePage() {
     const token = await getAccessTokenSilently()
     mutations.mutate({ dogData, token, dogId })
 
-    navigate('/home')
+    navigate('/dogs')
   }
 
   function handleSelect(event: React.ChangeEvent<HTMLSelectElement>) {
