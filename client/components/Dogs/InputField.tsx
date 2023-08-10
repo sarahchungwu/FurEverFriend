@@ -5,6 +5,7 @@ function InputField(props: {
   placeholder: string
   value: string | number
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  isRequired: boolean
 }) {
   return (
     <div className="flex flex-col">
@@ -19,7 +20,7 @@ function InputField(props: {
         value={props.value}
         onChange={props.onChange}
         className=" flex flex-row py-2 px-4 mb-6 ml-6 rounded-sm"
-        required
+        required={props.isRequired}
       />
     </div>
   )

@@ -75,6 +75,7 @@ function AddDogFormPage() {
             placeholder="e.g. Your dog's name"
             value={dogData.name}
             onChange={handleChange}
+            isRequired={true}
           />
           <InputField
             label="age"
@@ -83,6 +84,7 @@ function AddDogFormPage() {
             placeholder="e.g. 2"
             value={dogData.age === -1 ? '' : dogData.age}
             onChange={handleChange}
+            isRequired={true}
           />
           <InputField
             label="breed"
@@ -91,6 +93,7 @@ function AddDogFormPage() {
             placeholder="e.g. pug"
             value={dogData.breed}
             onChange={handleChange}
+            isRequired={true}
           />
           <InputField
             label="gender"
@@ -99,6 +102,7 @@ function AddDogFormPage() {
             placeholder="e.g. female or Male"
             value={dogData.gender}
             onChange={handleChange}
+            isRequired={true}
           />
           <InputField
             label="Image"
@@ -107,6 +111,7 @@ function AddDogFormPage() {
             placeholder="e.g. https://XXXXXX.jpg"
             value={dogData.img}
             onChange={handleChange}
+            isRequired={false}
           />
           <PersonalitySelect
             personalities={dogPersonalities}
@@ -120,6 +125,7 @@ function AddDogFormPage() {
             placeholder="e.g. my dog loves playing water"
             value={dogData.description}
             onChange={handleChange}
+            isRequired={true}
           />
           <SubmitButton />
         </form>
