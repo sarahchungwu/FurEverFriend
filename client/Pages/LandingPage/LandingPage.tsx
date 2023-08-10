@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 function LandingPage() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center bg-orange-50 min-h-screen p-20 bg-cover bg-cente">
+      <div className="flex flex-col items-center justify-center bg-orange-50 min-h-screen p-20 bg-cover bg-cente w-full">
         <div className="mb-20 flex flex-col justify-start pl-6 ">
           <motion.h1
             className=" text-2xl text-yellow-900 pb-2"
@@ -39,7 +39,7 @@ function LandingPage() {
           />
         </div>
 
-        <div className="space-x-4 flex flex-row">
+        <div className="space-x-4 flex flex-row justify-center w-11/12">
           <LoginButton />
           <RegisterButton />
         </div>

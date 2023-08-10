@@ -32,7 +32,7 @@ function MessageDetailPage() {
             <h2 className=" text-2xl font-bold mb-4 text-center ">
               {messageQuery.data.senderName}
             </h2>
-            <div className=" p-20 ">
+            <div className=" p-2 ">
               <p className="w-5/6 text-lg">{messageQuery.data.text}</p>
             </div>
             <button
