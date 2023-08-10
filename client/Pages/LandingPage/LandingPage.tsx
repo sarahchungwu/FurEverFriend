@@ -39,7 +39,7 @@ function LandingPage() {
           />
         </div>
 
-        <div className="space-x-4 flex flex-row">
+        <div className="space-x-4 flex flex-row justify-between w-5/6">
           <LoginButton />
           <RegisterButton />
         </div>
