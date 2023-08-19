@@ -1,6 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from 'react-query'
-import { DogsDataBackend } from '../../../models/dog'
 import { fetchDogsList } from '../../apis/dogs'
 import { fetchProfiles } from '../../apis/profile'
 import DogList from '../../components/Dogs/DogList'
@@ -54,15 +53,6 @@ function HomePage() {
             )}
           </div>
         )}
-        {/* thinking whether to keep it or not  */}
-        {/* <div className="flex flex-row justify-end mt-10 mr-16">
-          <div className="mt-36 ">
-            <FontAwesomeIcon
-              icon={faCommentDots}
-              className="text-5xl text-yellow-900 mb-5"
-            />
-          </div>
-        </div> */}
       </div>
     </>
   )
