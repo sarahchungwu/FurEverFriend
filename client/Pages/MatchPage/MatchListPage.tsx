@@ -8,7 +8,7 @@ function MatchListPage() {
   const { user, getAccessTokenSilently } = useAuth0()
 
   const dogListQuery = useQuery({
-    queryKey: 'fetchDogsList',
+    queryKey: 'fetchMatchList',
     queryFn: async () => {
       const accessToken = await getAccessTokenSilently()
       if (user && user.sub) {
