@@ -6,6 +6,7 @@ import { DogsDataBackend } from '../../../models/dog'
 import { useEffect, useState } from 'react'
 import { AddMatch } from '../../../models/matches'
 import { addNewMatch } from '../../apis/matches'
+import MatchedDogCard from '../../components/MatchDog/MatchDogCard'
 
 function AddMatchPage() {
   const userDogId = Number(useParams().id)
@@ -92,7 +93,6 @@ function AddMatchPage() {
   })
 
   async function handleAccept(matchedDogId: number) {
-    // const token = await getAccessTokenSilently()
     const matchDogData = {
       dogId: userDogId,
       matchedDogId: matchedDogId,
@@ -107,42 +107,11 @@ function AddMatchPage() {
     <>
       <div className="flex flex-row flex-wrap justify-center gap-4 w-10/12">
         {matchedDogs.map((matchedDog) => (
-          <div
-            className="w-2/3  text-yellow-950 bg-opacity-30 bg-orange-200 p-4 rounded-lg shadow-md pb-4 mb-14 mt-16 pt-8 transform transition-transform hover:scale-125"
+          <MatchedDogCard
+            matchedDog={matchedDog}
+            handleAccept={handleAccept}
             key={matchedDog.id}
-          >
-            <div className="text-center flex flex-col items-center ">
-              <img
-                src={
-                  matchedDog.img
-                    ? `${matchedDog.img} `
-                    : '/image/defalutDogImg.png'
-                }
-                alt={`${matchedDog.name} `}
-                className="w-4/5 h- object-cover mx-auto rounded-lg"
-              />
-
-              <h2 className="text-ls font-bold mt-2 ">{matchedDog.name}</h2>
-              <h2 className="text-sm font-normal mt-2 ">
-                {matchedDog.age} years old
-              </h2>
-              <h2 className="text-sm font-normal mt-2 ">{matchedDog.breed}</h2>
-              <h2 className="text-sm font-normal mt-2 ">{matchedDog.gender}</h2>
-              <h2 className="text-sm font-normal mt-2 ">
-                I am a {matchedDog.personality} dog
-              </h2>
-              <h2 className="text-sm font-normal mt-2  pt-4">
-                {matchedDog.description}
-              </h2>
-
-              <button
-                onClick={() => handleAccept(matchedDog.id)}
-                className="flex gap-10 h-2/3 bg-orange-200 shadow-lg text-yellow-950 border-none rounded-md px-4 py-2 cursor-pointer hover:bg-orange-300 focus:bg-orange-300 mt-28 transform transition-transform hover:scale-150"
-              >
-                Accept
-              </button>
-            </div>
-          </div>
+          />
         ))}
       </div>
     </>

@@ -1,6 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { DogsDataBackend } from '../../../models/dog'
 import { fetchDogsList } from '../../apis/dogs'
 import MatchList from '../../components/MatchList/MatchList'
@@ -20,12 +19,6 @@ function MatchListPage() {
     },
     enabled: !!user,
   })
-
-  // async function handleDelete(dogId: number) {
-  //   const token = await getAccessTokenSilently()
-  //   await deleteDog(token, dogId)
-  //   queryClient.invalidateQueries('fetchDogsList')
-  // }
 
   return (
     <>
